@@ -10,7 +10,7 @@ public class GameManager : CoreFunctionality
 
     #region [ PARAMETERS ]
 
-
+    private bool setupRun = false;
 
     #endregion
 
@@ -42,7 +42,7 @@ public class GameManager : CoreFunctionality
     // Initialiser function, serves a similar purpose to a constructor
     private void Init()
     {
-
+        Setup();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -54,6 +54,8 @@ public class GameManager : CoreFunctionality
             instance = this;
         }
         DontDestroyOnLoad(gameObject);
+
+        Setup();
     }
 
     void Start()
@@ -73,5 +75,13 @@ public class GameManager : CoreFunctionality
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+    private void Setup()
+    {
+        if (!setupRun)
+        {
+            itemDB.CompileDatabase();
 
+            setupRun = true;
+        }
+    }
 }

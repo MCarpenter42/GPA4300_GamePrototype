@@ -30,7 +30,7 @@ public class Player : CoreFunctionality
     private bool isOnFloor = false;
     [SerializeField] float jumpStrength = 2.0f;
 
-    // Interaction
+    // INTERACTION
 
     List<Interaction> interacts;
     [SerializeField] float interactRange = 3.0f;
@@ -39,6 +39,24 @@ public class Player : CoreFunctionality
 
     private Interaction intrClosest;
     private Interaction intrClosestPrev;
+
+    // INVENTORY
+
+    private Inventory inv;
+    public Inventory Inventory
+    {
+        get
+        {
+            if (inv == null)
+            {
+                inv = new Inventory();
+            }
+            return inv;
+        }
+        private set
+        { 
+        }
+    }
 
     #endregion
 
@@ -57,6 +75,7 @@ public class Player : CoreFunctionality
         LockCursor(true);
         GetInteractions();
         HideInteractInds();
+        Debug.Log(itemDB);
     }
 
     void Update()
@@ -106,7 +125,7 @@ public class Player : CoreFunctionality
 
     private void MoveControl()
     {
-        float movMulti = 6.0f;
+        float movMulti = 8.0f;
         if (Input.GetKey(controls.movement.sprint))
         {
             movMulti *= sprintFactor;
@@ -261,6 +280,14 @@ public class Player : CoreFunctionality
         }
     }
 
+    private void SetCamera()
+    {
+        float h = this.GetComponent<CapsuleCollider>().height;
+        float r = this.GetComponent<CapsuleCollider>().radius;
+        float x = (h - r) / 2;
+        playerCam.SetFollow(this.gameObject, x);
+    }
+
     public void LockCursor(bool csrLock)
     {
         if (csrLock)
@@ -274,14 +301,6 @@ public class Player : CoreFunctionality
             Cursor.visible = true;
             cursorLocked = false;
         }
-    }
-
-    private void SetCamera()
-    {
-        float h = this.GetComponent<CapsuleCollider>().height;
-        float r = this.GetComponent<CapsuleCollider>().radius;
-        float x = (h / 2) - r;
-        playerCam.SetFollow(this.gameObject, x);
     }
 
     private void HideInteractInds()
@@ -311,5 +330,5 @@ public class Player : CoreFunctionality
         return closestInteract;
     }
 
-
+    
 }

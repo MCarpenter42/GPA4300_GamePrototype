@@ -16,11 +16,20 @@ public class Interaction : CoreFunctionality
         }
     }
 
+    private GameObject mainCam;
+
+    private bool isEnabled = true;
     [SerializeField] UnityEvent interactEvent;
 
     private GameObject indicator;
 
-    private GameObject mainCam;
+    Sprite[] icons;
+    [SerializeField] Sprite press;
+    [SerializeField] Sprite pickup;
+    [SerializeField] Sprite push;
+    [SerializeField] Sprite locked;
+    [SerializeField] Sprite unlock;
+    [SerializeField] int startIcon;
 
     #endregion
 
@@ -30,11 +39,12 @@ public class Interaction : CoreFunctionality
     {
         GetIndicator();
         GetCamera();
+        IconsToArray();
     }
     
     void Start()
     {
-        
+        SetIcon(startIcon);
     }
 
     void Update()
@@ -63,6 +73,19 @@ public class Interaction : CoreFunctionality
             interactEvent.Invoke();
             return true;
         }
+    }
+
+    private void IconsToArray()
+    {
+        icons = new Sprite[]
+        {
+            null,
+            press,
+            pickup,
+            push,
+            locked,
+            unlock
+        };
     }
 
     private void GetIndicator()
@@ -94,5 +117,18 @@ public class Interaction : CoreFunctionality
         dirToCam = dirToCam.normalized * -1.0f;
         indicator.transform.rotation = Quaternion.LookRotation(dirToCam, Vector3.up);
     }
+
+    public void SetIcon(int id)
+    {
+        for (int i = 0; i < indicator.transform.childCount; i++)
+        {
+            GameObject child = indicator.transform.GetChild(i).gameObject;
+            if (child.GetComponent<Image>() != null)
+            {
+                child.GetComponent<Image>().sprite = icons[id];
+            }
+        }
+    }
+
 
 }

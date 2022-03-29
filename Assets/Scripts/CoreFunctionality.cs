@@ -9,6 +9,7 @@ public class CoreFunctionality : MonoBehaviour
 
     public static Controls controls = new Controls();
     public static Settings settings = new Settings();
+    public static ItemDatabase itemDB = new ItemDatabase();
 
     #endregion
 
@@ -67,7 +68,7 @@ public class CoreFunctionality : MonoBehaviour
         }
         return listOut;
     }
-    
+
     public static List<GameObject> GetChildrenWithComponent<T>(GameObject parentObj)
     {
         List<GameObject> childrenWithComponent = new List<GameObject>();
