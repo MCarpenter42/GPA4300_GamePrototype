@@ -25,6 +25,7 @@ public class Player : CoreFunctionality
 
     [SerializeField] float maxSpeed = 3.0f;
     [SerializeField] float sprintFactor = 2.0f;
+    private Vector3 moveFactors = new Vector3();
 
     private bool isOnFloor = false;
     [SerializeField] float jumpStrength = 2.0f;
@@ -32,6 +33,12 @@ public class Player : CoreFunctionality
     // Interaction
 
     List<Interaction> interacts;
+    [SerializeField] float interactRange = 3.0f;
+    [SerializeField] float interactAngle = 10.0f;
+    private bool canInteract = false;
+
+    private Interaction intrClosest;
+    private Interaction intrClosestPrev;
 
     #endregion
 
@@ -49,20 +56,20 @@ public class Player : CoreFunctionality
     {
         LockCursor(true);
         GetInteractions();
-        Debug.Log(interacts[0].pos);
+        HideInteractInds();
     }
 
     void Update()
     {
-        Look();
-        Movement();
-        Interact();
+        LookControl();
+        MoveControl();
+        InteractCheck();
     }
 
     void FixedUpdate()
     {
         playerCam.SetRot(new Vector3(camPitch, camYaw));
-        CapSpeed();
+        MovementPhysics();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -75,7 +82,7 @@ public class Player : CoreFunctionality
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-    private void Look()
+    private void LookControl()
     {
         camPitch += rotFactor * Input.GetAxis("Mouse Y") * (float)pitchDir;
         camYaw += rotFactor * Input.GetAxis("Mouse X");
@@ -97,38 +104,142 @@ public class Player : CoreFunctionality
         transform.eulerAngles = new Vector3(0.0f, camYaw, 0.0f);
     }
 
-    private void Movement()
+    private void MoveControl()
     {
+        float movMulti = 6.0f;
+        if (Input.GetKey(controls.movement.sprint))
+        {
+            movMulti *= sprintFactor;
+        }
+
         float fwdFactor = 0;
         float rhtFactor = 0;
         if (Input.GetKey(controls.movement.forward))
         {
-            fwdFactor += maxSpeed;
+            fwdFactor += maxSpeed * movMulti;
         }
         if (Input.GetKey(controls.movement.back))
         {
-            fwdFactor -= maxSpeed;
+            fwdFactor -= maxSpeed * movMulti;
         }
         if (Input.GetKey(controls.movement.right))
         {
-            rhtFactor += maxSpeed;
+            rhtFactor += maxSpeed * movMulti;
         }
         if (Input.GetKey(controls.movement.left))
         {
-            rhtFactor -= maxSpeed;
+            rhtFactor -= maxSpeed * movMulti;
         }
-        Vector3 moveForce = transform.forward * fwdFactor + transform.right * rhtFactor;
-        rb.AddForce(moveForce);
+        moveFactors[2] = fwdFactor;
+        moveFactors[0] = rhtFactor;
 
         if (isOnFloor && Input.GetKeyDown(controls.movement.jump))
         {
-            Jump();
+            moveFactors[1] = jumpStrength;
+        }
+        else if (!isOnFloor)
+        {
+            moveFactors[1] = 0.0f;
         }
     }
 
-    private void Interact()
+    private void InteractCheck()
     {
+        intrClosest = GetClosestInteract();
+        if (intrClosest != intrClosestPrev && intrClosestPrev != null)
+        {
+            intrClosestPrev.ShowIndicator(false);
+        }
 
+        Vector3 disp = intrClosest.pos - transform.position;
+        float dist = disp.magnitude;
+
+        Vector3 camDisp = intrClosest.pos - playerCam.transform.position;
+        float lookDeviation = Vector3.Angle(playerCam.transform.forward, camDisp);
+
+        if (dist <= interactRange && lookDeviation <= interactAngle)
+        {
+            canInteract = true;
+            intrClosest.ShowIndicator(true);
+        }
+        else
+        {
+            canInteract = false;
+            intrClosest.ShowIndicator(false);
+        }
+
+        if (canInteract && Input.GetKeyDown(controls.actions.interact))
+        {
+            intrClosest.InteractEvent();
+        }
+
+        intrClosestPrev = intrClosest;
+    }
+
+    private void MovementPhysics()
+    {
+        Vector3 velocityFlat = rb.velocity;
+        velocityFlat[1] = 0.0f;
+        Vector3 relVel = transform.InverseTransformDirection(velocityFlat);
+        Vector3 decelForce = new Vector3(0.0f, 0.0f, 0.0f);
+        float decelFactor = 8.0f;
+
+        if (moveFactors[2] == 0.0f && (relVel[2] > 0.05f || relVel[2] < -0.05f))
+        {
+            if (relVel[2] > 0.0f)
+            {
+                decelForce -= transform.forward * maxSpeed * decelFactor;
+            }
+            else
+            {
+                decelForce += transform.forward * maxSpeed * decelFactor;
+            }
+        }
+        if (moveFactors[0] == 0.0f && (relVel[0] > 0.05f || relVel[0] < -0.05f))
+        {
+            if (relVel[0] > 0.0f)
+            {
+                decelForce -= transform.right * maxSpeed * decelFactor;
+            }
+            else
+            {
+                decelForce += transform.right * maxSpeed * decelFactor;
+            }
+        }
+
+        Vector3 lateralForce = transform.forward * moveFactors[2] + transform.right * moveFactors[0];
+        lateralForce += decelForce;
+        rb.AddForce(lateralForce);
+
+        if (relVel.magnitude < 0.05f)
+        {
+            Vector3 newVel = new Vector3(0.0f, rb.velocity[1], 0.0f);
+            rb.velocity = newVel;
+        }
+
+        if (moveFactors[1] > 0.0f)
+        {
+            rb.AddForce(new Vector3(0.0f, moveFactors[1], 0.0f), ForceMode.Impulse);
+            isOnFloor = false;
+        }
+
+        CapSpeed();
+    }
+
+    private void CapSpeed()
+    {
+        float movMulti = 1.0f;
+        if (Input.GetKey(controls.movement.sprint))
+        {
+            movMulti *= sprintFactor;
+        }
+
+        Vector3 flatVel = new Vector3(rb.velocity[0], 0.0f, rb.velocity[2]);
+        if (flatVel.magnitude > maxSpeed * movMulti)
+        {
+            Vector3 newVel = flatVel.normalized * maxSpeed * movMulti + new Vector3(0.0f, rb.velocity[1], 0.0f);
+            rb.velocity = newVel;
+        }
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -173,20 +284,31 @@ public class Player : CoreFunctionality
         playerCam.SetFollow(this.gameObject, x);
     }
 
-    private void CapSpeed()
+    private void HideInteractInds()
     {
-        Vector3 flatVel = new Vector3(rb.velocity[0], 0.0f, rb.velocity[2]);
-        if (flatVel.magnitude > maxSpeed)
+        foreach (Interaction target in interacts)
         {
-            Vector3 newVel = flatVel.normalized * maxSpeed + new Vector3(0.0f, rb.velocity[1], 0.0f);
-            rb.velocity = newVel;
+            target.ShowIndicator(false);
         }
     }
 
-    private void Jump()
+    private Interaction GetClosestInteract()
     {
-        rb.AddForce(new Vector3(0.0f, jumpStrength, 0.0f), ForceMode.Impulse);
-        isOnFloor = false;
+        Interaction closestInteract = new Interaction();
+        float closestDistance = 9999.9999f;
+
+        foreach (Interaction target in interacts)
+        {
+            Vector3 disp = target.pos - transform.position;
+            float dist = disp.magnitude;
+            if (dist < closestDistance)
+            {
+                closestInteract = target;
+                closestDistance = dist;
+            }
+        }
+
+        return closestInteract;
     }
 
 

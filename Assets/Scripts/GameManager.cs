@@ -10,9 +10,7 @@ public class GameManager : CoreFunctionality
 
     #region [ PARAMETERS ]
 
-    private float gravityScale = 30.0f;
-    public Vector3 gravVector { get; private set; }
-    private List<Rigidbody> gravityBodies = new List<Rigidbody>();
+
 
     #endregion
 
@@ -44,6 +42,7 @@ public class GameManager : CoreFunctionality
     // Initialiser function, serves a similar purpose to a constructor
     private void Init()
     {
+
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -55,12 +54,11 @@ public class GameManager : CoreFunctionality
             instance = this;
         }
         DontDestroyOnLoad(gameObject);
-        this.gravVector = new Vector3(0.0f, -gravityScale, 0.0f);
     }
 
     void Start()
     {
-        GetGravityObjects();
+
     }
 
     void Update()
@@ -70,28 +68,10 @@ public class GameManager : CoreFunctionality
 
     void FixedUpdate()
     {
-        ApplyGravity();
+
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-    public void SetGravityScale(float scale)
-    {
-        gravityScale = scale;
-    }
 
-    private void GetGravityObjects()
-    {
-        gravityBodies = ArrayToList(FindObjectsOfType<Rigidbody>());
-        Debug.Log(gravityBodies.Count);
-        Debug.Log(gravVector);
-    }
-
-    private void ApplyGravity()
-    {
-        foreach (Rigidbody rb in gravityBodies)
-        {
-            rb.AddForce(gravVector * rb.mass);
-        }
-    }
 }
