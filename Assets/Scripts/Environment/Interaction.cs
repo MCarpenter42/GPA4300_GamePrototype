@@ -16,38 +16,48 @@ public class Interaction : CoreFunctionality
         }
     }
 
-    private GameObject mainCam;
+    protected GameObject mainCam;
 
-    private bool isEnabled = true;
-    [SerializeField] UnityEvent interactEvent;
+    public bool isEnabled { get; protected set; }
+    [SerializeField] protected UnityEvent interactEvent;
 
-    private GameObject indicator;
+    protected GameObject indicator;
 
     Sprite[] icons;
-    [SerializeField] Sprite press;
-    [SerializeField] Sprite pickup;
-    [SerializeField] Sprite push;
-    [SerializeField] Sprite locked;
-    [SerializeField] Sprite unlock;
-    [SerializeField] int startIcon;
+    [SerializeField] protected Sprite press;
+    [SerializeField] protected Sprite pickup;
+    [SerializeField] protected Sprite push;
+    [SerializeField] protected Sprite locked;
+    [SerializeField] protected Sprite unlock;
+    [SerializeField] protected int startIcon;
+
+    protected Player player;
 
     #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    
+    public Interaction()
+    {
+        this.isEnabled = true;
+    }
 
-    void Awake()
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+    protected void Awake()
     {
         GetIndicator();
         GetCamera();
         IconsToArray();
     }
-    
-    void Start()
+
+    protected void Start()
     {
         SetIcon(startIcon);
+        GetPlayer();
     }
 
-    void Update()
+    protected void Update()
     {
         if (indicator.activeSelf)
         {
@@ -55,14 +65,14 @@ public class Interaction : CoreFunctionality
         }
     }
 
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-    public bool InteractEvent()
+    public virtual bool InteractEvent()
     {
         if (interactEvent == null)
         {
@@ -75,7 +85,7 @@ public class Interaction : CoreFunctionality
         }
     }
 
-    private void IconsToArray()
+    protected void IconsToArray()
     {
         icons = new Sprite[]
         {
@@ -88,7 +98,7 @@ public class Interaction : CoreFunctionality
         };
     }
 
-    private void GetIndicator()
+    protected void GetIndicator()
     {
         GameObject target;
         for (int i = 0; i < gameObject.transform.childCount; i++)
@@ -101,7 +111,7 @@ public class Interaction : CoreFunctionality
         }
     }
 
-    private void GetCamera()
+    protected void GetCamera()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera");
     }
@@ -111,7 +121,7 @@ public class Interaction : CoreFunctionality
         indicator.SetActive(show);
     }
 
-    private void RotateIndicator()
+    protected void RotateIndicator()
     {
         Vector3 dirToCam = mainCam.transform.position - indicator.transform.position;
         dirToCam = dirToCam.normalized * -1.0f;
@@ -130,5 +140,13 @@ public class Interaction : CoreFunctionality
         }
     }
 
+    protected void GetPlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
+    public void SetEnabled(bool enable)
+    {
+        isEnabled = enable;
+    }
 }

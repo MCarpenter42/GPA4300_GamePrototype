@@ -9,6 +9,13 @@ public class ItemDatabase
 	
 	public Item[] items { get; private set; }
 
+	public Item nullItem = new Item
+	(
+		null,
+		null,
+		"EmptyIcon"
+	);
+
 	public Item key1 = new Item
 	(
 		"Iron Key",
@@ -24,6 +31,7 @@ public class ItemDatabase
     {
 		items = new Item[]
 		{
+			nullItem,
 			key1
 		};
     }

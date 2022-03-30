@@ -61,12 +61,33 @@ only do they inherit everything they would from MonoBehaviour, but
 also all the custom stuff.
 
 
- << THE "OBJECT ROOM" >>
+ << THE INTERACTION SYSTEM >>
 
-You may notice the weird box off to one side with an extra camera
-that is disabled by default - this is what I like to call the
-"object room". The point of it is to provide a clean space with
-which to take consistent screenshots of items, that can then be
-used to create icons for items in the inventory. At a later date,
-I plan on transferring this functionality to a separate scene, but
-for now, please don't remove this room!
+So, there's a scipt for handling interactions, but you don't use
+it by just adding the script to the relevant GameObject. Instead,
+you need to add one of these two prefabs to it as a child object:
+
+ - InteractionHandler
+ - LockedInteractionHandler
+ 
+The standard version of this script/class is used in most cases,
+and the "Locked" version is used whenever you want to have an
+object require a "key" item - whether an actual key or something
+else - to be interacted with, such as a door or treasure chest.
+
+The interaction handler object consists of the object itself, as
+well as an interaction icon, which is actually a UI canvas object
+that exists in the world space, rather than as an overlay. When
+positioning the interaction handler, you'll want to set the
+position of the main object as the actual point the player
+interacts with, and then set the position of the icon relative to
+that so that it doesn't clip with anything too severely.
+
+To make the interaction handler actually *do* something, you'll
+want to take a look at it in the inspector. There's a field for
+you to add an "Interact Event", which is what you use to connect
+the script to one on a different object. Drag the object you want
+the interaction to use into the box that's looking for a
+GameObject, then select the method you want the interaction to
+trigger from the drop-down box. Make sure to add the script with
+the method you want to trigger to the right object!

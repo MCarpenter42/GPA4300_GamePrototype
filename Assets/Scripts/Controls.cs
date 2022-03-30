@@ -23,10 +23,11 @@ public class Controls_Movement
 
 public class Controls_Actions
 {
-    public string interact = "e";
+    public string interact = "mouse 0";
 }
 
 public class Controls_Menu
 {
     public string pause = "escape";
+    public string inventory = "e";
 }

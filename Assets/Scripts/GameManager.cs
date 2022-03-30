@@ -12,6 +12,8 @@ public class GameManager : CoreFunctionality
 
     private bool setupRun = false;
 
+    public static bool isCursorLocked;
+
     #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -60,7 +62,7 @@ public class GameManager : CoreFunctionality
 
     void Start()
     {
-
+        OnStartDebugging();
     }
 
     void Update()
@@ -83,5 +85,13 @@ public class GameManager : CoreFunctionality
 
             setupRun = true;
         }
+    }
+
+    private void OnStartDebugging()
+    {
+        /*foreach (Item item in itemDB.items)
+        {
+            Debug.Log(item.name + "\n" + item.description + "\n" + item.iconPath);
+        }*/
     }
 }

@@ -9,6 +9,8 @@ public class Inventory : CoreFunctionality
 
     private int[] items = new int[30];
 
+    public InvenFrame invenFrame = new InvenFrame();
+
 	#endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -26,7 +28,8 @@ public class Inventory : CoreFunctionality
                 break;
             }
         }
-        Debug.Log("Item \"" + itemDB.items[i].name + "\" added to inventory slot " + i + ".");
+        Debug.Log("Item of ID " + id + " (\"" + itemDB.items[id].name + "\") added to inventory slot " + i + ".");
+        invenFrame.UpdateIcons();
         return itemAdded;
     }
 
@@ -49,5 +52,21 @@ public class Inventory : CoreFunctionality
         int slot2_id = items[slot2_pos];
         items[slot1_pos] = slot2_id;
         items[slot2_pos] = slot1_id;
+        invenFrame.UpdateIcons();
+    }
+
+    public string[] GetItemData(int index)
+    {
+        int itemID = this.items[index];
+        if (itemID < itemDB.items.Length)
+        {
+            Item targetItem = itemDB.items[this.items[index]];
+            //Debug.Log("Data for slot " + index + " -\nItem ID: " + itemID);
+            return new string[] { targetItem.name, targetItem.description, targetItem.iconPath };
+        }
+        else
+        {
+            return new string[] { "<INVALID_ID>", "", "Images/Sprites/InventoryIcons/EmptyIcon" };
+        }
     }
 }

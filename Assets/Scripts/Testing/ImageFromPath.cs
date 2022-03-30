@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI : CoreFunctionality
+public class ImageFromPath : MonoBehaviour
 {
-	#region [ PARAMETERS ]
-	
+    #region [ PARAMETERS ]
+
+    private Image targetImage;
+
 	#endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
     void Awake()
     {
-        
+        targetImage = gameObject.GetComponent<Image>();
+        targetImage.sprite = Resources.Load<Sprite>("Images/Sprites/InventoryIcons/Key1");
     }
 
     void Start()
@@ -33,19 +36,4 @@ public class UI : CoreFunctionality
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	
-    public void LockCursor(bool lockCsr)
-    {
-        if (lockCsr && !GameManager.isCursorLocked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            GameManager.isCursorLocked = true;
-        }
-        else if (!lockCsr && GameManager.isCursorLocked)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            GameManager.isCursorLocked = false;
-        }
-    }
 }

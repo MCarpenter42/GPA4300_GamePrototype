@@ -42,21 +42,7 @@ public class Player : CoreFunctionality
 
     // INVENTORY
 
-    private Inventory inv;
-    public Inventory Inventory
-    {
-        get
-        {
-            if (inv == null)
-            {
-                inv = new Inventory();
-            }
-            return inv;
-        }
-        private set
-        { 
-        }
-    }
+    public Inventory Inventory { get; private set; }
 
     #endregion
 
@@ -68,6 +54,8 @@ public class Player : CoreFunctionality
         SetCamera();
         rotFactor = (float)settings.control.lookSensitivity * 0.20f;
         CheckCamInvert();
+        this.Inventory = new Inventory();
+        Inventory.invenFrame = FindObjectOfType<InvenFrame>();
     }
     
     void Start()
@@ -75,7 +63,6 @@ public class Player : CoreFunctionality
         LockCursor(true);
         GetInteractions();
         HideInteractInds();
-        Debug.Log(itemDB);
     }
 
     void Update()
@@ -103,8 +90,11 @@ public class Player : CoreFunctionality
 
     private void LookControl()
     {
-        camPitch += rotFactor * Input.GetAxis("Mouse Y") * (float)pitchDir;
-        camYaw += rotFactor * Input.GetAxis("Mouse X");
+        if (GameManager.isCursorLocked)
+        {
+            camPitch += rotFactor * Input.GetAxis("Mouse Y") * (float)pitchDir;
+            camYaw += rotFactor * Input.GetAxis("Mouse X");
+        }
 
         // Clamp pitch
         camPitch = Mathf.Clamp(camPitch, -90.0f, 90.0f);
@@ -165,31 +155,37 @@ public class Player : CoreFunctionality
     private void InteractCheck()
     {
         intrClosest = GetClosestInteract();
-        if (intrClosest != intrClosestPrev && intrClosestPrev != null)
-        {
-            intrClosestPrev.ShowIndicator(false);
-        }
 
-        Vector3 disp = intrClosest.pos - transform.position;
-        float dist = disp.magnitude;
-
-        Vector3 camDisp = intrClosest.pos - playerCam.transform.position;
-        float lookDeviation = Vector3.Angle(playerCam.transform.forward, camDisp);
-
-        if (dist <= interactRange && lookDeviation <= interactAngle)
+        if (intrClosest != null)
         {
-            canInteract = true;
-            intrClosest.ShowIndicator(true);
-        }
-        else
-        {
-            canInteract = false;
-            intrClosest.ShowIndicator(false);
-        }
+            if (intrClosest != intrClosestPrev && intrClosestPrev != null)
+            {
+                intrClosestPrev.ShowIndicator(false);
+            }
 
-        if (canInteract && Input.GetKeyDown(controls.actions.interact))
-        {
-            intrClosest.InteractEvent();
+            Vector3 disp = intrClosest.pos - transform.position;
+            float dist = disp.magnitude;
+
+            Vector3 camFacing = playerCam.transform.forward;
+            Vector3 camDisp = intrClosest.pos - playerCam.transform.position;
+            float lookDeviation = Vector3.Angle(camFacing, camDisp);
+
+            if (dist <= interactRange && lookDeviation <= interactAngle)
+            {
+                canInteract = true;
+                intrClosest.ShowIndicator(true);
+            }
+            else
+            {
+                canInteract = false;
+                intrClosest.ShowIndicator(false);
+            }
+
+            if (canInteract && Input.GetKeyDown(controls.actions.interact))
+            {
+                intrClosest.InteractEvent();
+            }
+
         }
 
         intrClosestPrev = intrClosest;
@@ -313,14 +309,14 @@ public class Player : CoreFunctionality
 
     private Interaction GetClosestInteract()
     {
-        Interaction closestInteract = new Interaction();
+        Interaction closestInteract = null;
         float closestDistance = 9999.9999f;
 
         foreach (Interaction target in interacts)
         {
             Vector3 disp = target.pos - transform.position;
             float dist = disp.magnitude;
-            if (dist < closestDistance)
+            if (dist < closestDistance && target.isEnabled)
             {
                 closestInteract = target;
                 closestDistance = dist;
@@ -330,5 +326,5 @@ public class Player : CoreFunctionality
         return closestInteract;
     }
 
-    
+
 }
