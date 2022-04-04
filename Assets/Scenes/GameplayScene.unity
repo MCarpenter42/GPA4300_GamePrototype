@@ -4778,8 +4778,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canReClose: 1
-  unobscuredInteract: {fileID: 510772909}
-  obscuredInteract: {fileID: 901120995}
+  unobstructedInteract: {fileID: 510772909}
+  obstructedInteract: {fileID: 901120995}
   rotOpen: {x: 0, y: -90, z: 0}
 --- !u!1001 &1020403192
 PrefabInstance:

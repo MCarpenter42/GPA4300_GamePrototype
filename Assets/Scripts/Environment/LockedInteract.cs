@@ -38,13 +38,13 @@ public class LockedInteract : Interaction
                 bool hasKey = player.Inventory.CheckForItem(keyItemID);
                 if (hasKey)
                 {
-                    //Debug.Log("Unlocked!");
+                    Debug.Log("Unlocked!");
                     isLocked = false;
                     interactEvent.Invoke();
                 }
                 else
                 {
-                    //Debug.Log("You don't have the right key...");
+                    Debug.Log("You don't have the right key...");
                 }
             }
             else

@@ -26,11 +26,12 @@ public class Door : MonoBehaviour
     void Awake()
     {
         rotClosed = gameObject.transform.eulerAngles;
+        CheckLocks();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	
-    private void DoesLock()
+    private void CheckLocks()
     {
         if (unobstructedInteract.GetComponent<LockedInteract>() != null)
         {
@@ -59,11 +60,14 @@ public class Door : MonoBehaviour
     {
         isMoving = true;
 
-        unobstructedInteract.SetEnabled(false);
-        obstructedInteract.SetEnabled(false);
+        if (obstructedInteract != null)
+        {
+            obstructedInteract.SetEnabled(false);
+        }
+
 
         Vector3 rotStart = GetRotPoints(opening)[0];
-        Vector3 rotEnd = GetRotPoints(opening)[0];
+        Vector3 rotEnd = GetRotPoints(opening)[1];
 
         int aFrames = 80;
         float aDuration = 0.8f;
@@ -90,7 +94,7 @@ public class Door : MonoBehaviour
         if (canReClose)
         {
             unobstructedInteract.SetEnabled(true);
-            if (!isOpen)
+            if (!isOpen && obstructedInteract != null)
             {
                 obstructedInteract.SetEnabled(true);
             }
