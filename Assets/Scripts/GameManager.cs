@@ -89,9 +89,6 @@ public class GameManager : CoreFunctionality
 
     private void OnStartDebugging()
     {
-        /*foreach (Item item in itemDB.items)
-        {
-            Debug.Log(item.name + "\n" + item.description + "\n" + item.iconPath);
-        }*/
+
     }
 }
