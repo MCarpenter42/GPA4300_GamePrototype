@@ -74,7 +74,7 @@ public class Player : CoreFunctionality
 
     void FixedUpdate()
     {
-        playerCam.SetRot(new Vector3(camPitch, camYaw));
+        playerCam.SetRot(new Vector3(camPitch, camYaw, 0.0f));
         MovementPhysics();
     }
 
@@ -282,6 +282,7 @@ public class Player : CoreFunctionality
         float r = this.GetComponent<CapsuleCollider>().radius;
         float x = (h - r) / 2;
         playerCam.SetFollow(this.gameObject, x);
+        camYaw = playerCam.transform.eulerAngles[1];
     }
 
     public void LockCursor(bool csrLock)
@@ -290,12 +291,14 @@ public class Player : CoreFunctionality
         {
             Cursor.lockState = CursorLockMode.Locked;
             cursorLocked = true;
+            GameManager.isCursorLocked = true;
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             cursorLocked = false;
+            GameManager.isCursorLocked = false;
         }
     }
 
