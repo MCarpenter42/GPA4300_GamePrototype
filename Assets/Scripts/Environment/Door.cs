@@ -19,6 +19,8 @@ public class Door : MonoBehaviour
     [SerializeField] Vector3 rotOpen;
     private bool isMoving = false;
 
+    [SerializeField] bool startOpen;
+
 	#endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -28,9 +30,21 @@ public class Door : MonoBehaviour
         rotClosed = gameObject.transform.eulerAngles;
         CheckLocks();
     }
+    private void Start()
+    {
+        if (startOpen)
+        {
+            Debug.Log("OPEN!!");
+            SetOpen(true);
+        }
+        else
+        {
+            Debug.Log("NOT OPEN!!!!");
+        }
+    }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	
+
     private void CheckLocks()
     {
         if (unobstructedInteract.GetComponent<LockedInteract>() != null)

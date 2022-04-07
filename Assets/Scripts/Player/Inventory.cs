@@ -9,7 +9,7 @@ public class Inventory : CoreFunctionality
 
     private int[] items = new int[30];
 
-    public InvenFrame invenFrame = new InvenFrame();
+    public InvenFrame invenFrame;
 
 	#endregion
 
