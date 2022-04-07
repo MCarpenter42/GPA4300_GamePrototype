@@ -23,16 +23,24 @@ public class ItemDatabase
 		"Key1"
 	);
 
+	public Item gem1 = new Item
+	(
+		"Emerald",
+		"A highly polished green gemstone.",
+		"EmptyIcon"
+	);
+
 	#endregion
 
-    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	public void CompileDatabase()
     {
 		items = new Item[]
 		{
 			nullItem,
-			key1
+			key1,
+			gem1
 		};
     }
 }
