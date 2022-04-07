@@ -34,12 +34,16 @@ public class Door : MonoBehaviour
     {
         if (startOpen)
         {
-            Debug.Log("OPEN!!");
-            SetOpen(true);
-        }
-        else
-        {
-            Debug.Log("NOT OPEN!!!!");
+            transform.eulerAngles = rotOpen;
+            isOpen = true;
+            if (canReClose)
+            {
+                unobstructedInteract.SetEnabled(true);
+                if (obstructedInteract != null)
+                {
+                    obstructedInteract.SetEnabled(false);
+                }
+            }
         }
     }
 
