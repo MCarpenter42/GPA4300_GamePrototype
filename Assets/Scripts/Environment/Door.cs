@@ -47,13 +47,19 @@ public class Door : MonoBehaviour
 
     private void CheckLocks()
     {
-        if (unobstructedInteract.GetComponent<LockedInteract>() != null)
+        if (unobstructedInteract != null)
         {
-            unobLock = unobstructedInteract.GetComponent<LockedInteract>();
+            if (unobstructedInteract.GetComponent<LockedInteract>() != null)
+            {
+                unobLock = unobstructedInteract.GetComponent<LockedInteract>();
+            }
         }
-        if (obstructedInteract.GetComponent<LockedInteract>() != null)
+        if (obstructedInteract != null)
         {
-            obLock = obstructedInteract.GetComponent<LockedInteract>();
+            if (obstructedInteract.GetComponent<LockedInteract>() != null)
+            {
+                obLock = obstructedInteract.GetComponent<LockedInteract>();
+            }
         }
     }
 
