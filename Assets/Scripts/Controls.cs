@@ -38,13 +38,13 @@ public class Controls_Movement
 
 public class Controls_Actions
 {
-    public string interact = "mouse 0";
+    public string interact = "e";
 }
 
 public class Controls_Menu
 {
     public string pause = "escape";
-    public string inventory = "e";
+    public string inventory = "i";
 }
 
 // This class exists solely for the purpose of being able

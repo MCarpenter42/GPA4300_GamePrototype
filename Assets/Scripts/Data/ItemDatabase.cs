@@ -8,21 +8,21 @@ public class ItemDatabase
 	#region [ PARAMETERS ]
 	
 	public Item[] items { get; private set; }
-
+	// ID 0
 	public Item nullItem = new Item
 	(
 		null,
 		null,
 		"EmptyIcon"
 	);
-
+	// ID 1
 	public Item key1 = new Item
 	(
 		"Iron Key",
 		"A simple iron key.",
 		"Key1"
 	);
-
+	// ID 2
 	public Item gem1 = new Item
 	(
 		"Emerald",
