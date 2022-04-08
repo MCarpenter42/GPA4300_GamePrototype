@@ -58,7 +58,7 @@ public class Inventory : CoreFunctionality
     public string[] GetItemData(int index)
     {
         int itemID = this.items[index];
-        if (itemID < itemDB.items.Length)
+        if (itemID < itemDB.items.Count)
         {
             Item targetItem = itemDB.items[this.items[index]];
             //Debug.Log("Data for slot " + index + " -\nItem ID: " + itemID);

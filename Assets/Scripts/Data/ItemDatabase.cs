@@ -7,28 +7,7 @@ public class ItemDatabase
 {
 	#region [ PARAMETERS ]
 	
-	public Item[] items { get; private set; }
-	// ID 0
-	public Item nullItem = new Item
-	(
-		null,
-		null,
-		"EmptyIcon"
-	);
-	// ID 1
-	public Item key1 = new Item
-	(
-		"Iron Key",
-		"A simple iron key.",
-		"Key1"
-	);
-	// ID 2
-	public Item gem1 = new Item
-	(
-		"Emerald",
-		"A highly polished green gemstone.",
-		"Gem1"
-	);
+	public List<Item> items { get; private set; }
 
 	#endregion
 
@@ -36,11 +15,29 @@ public class ItemDatabase
 
 	public void CompileDatabase()
     {
-		items = new Item[]
+		items = new List<Item>
 		{
-			nullItem,
-			key1,
-			gem1
+			// ID 0 - Empty item
+			new Item
+			(
+				null,
+				null,
+				"EmptyIcon"
+			),
+			// ID 1 - Test key
+			new Item
+			(
+				"Iron Key",
+				"A simple iron key.",
+				"Key1"
+			),
+			// ID 2 - Emerald
+			new Item
+			(
+				"Emerald",
+				"A highly polished green gemstone.",
+				"Gem1"
+			),
 		};
     }
 }
