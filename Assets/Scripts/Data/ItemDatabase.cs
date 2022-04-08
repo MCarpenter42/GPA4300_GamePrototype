@@ -27,7 +27,7 @@ public class ItemDatabase
 	(
 		"Emerald",
 		"A highly polished green gemstone.",
-		"EmptyIcon"
+		"Gem1"
 	);
 
 	#endregion
