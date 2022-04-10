@@ -5332,6 +5332,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1945097324}
     m_Modifications:
     - target: {fileID: 2655651107831220330, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: keyItemID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2655651107831220330, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
       propertyPath: startIcon
       value: 4
       objectReference: {fileID: 0}
@@ -5954,6 +5958,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1593f24dde0890c47944d00b3f2bc2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &993426035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2884201957558223027, guid: e26841e21d612b2418c65a13aa40f510, type: 3}
+  m_PrefabInstance: {fileID: 5680023778222367580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &993426036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993426035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88d80bb11001ea4b9038bd4c24f5fa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 3
 --- !u!4 &993846733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fdd401c3796796347a952d713cbdafba, type: 3}
@@ -11767,6 +11789,18 @@ PrefabInstance:
     - target: {fileID: 2884201957558223027, guid: e26841e21d612b2418c65a13aa40f510, type: 3}
       propertyPath: m_Name
       value: LockpickPins
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058037318415849675, guid: e26841e21d612b2418c65a13aa40f510, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 993426036}
+    - target: {fileID: 4058037318415849675, guid: e26841e21d612b2418c65a13aa40f510, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058037318415849675, guid: e26841e21d612b2418c65a13aa40f510, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ItemObject, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7012185581191645065, guid: e26841e21d612b2418c65a13aa40f510, type: 3}
       propertyPath: m_LocalRotation.w
