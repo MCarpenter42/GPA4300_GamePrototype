@@ -38,6 +38,13 @@ public class ItemDatabase
 				"A highly polished green gemstone.",
 				"Gem1"
 			),
+			// ID 3 - Lockpins
+			new Item
+			(
+				"Lockpins",
+				"Useful to lockpick the cell door",
+				"lockpins"
+			 ),
 		};
     }
 }
