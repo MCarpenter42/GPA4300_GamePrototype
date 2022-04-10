@@ -34,7 +34,8 @@ public class Door : MonoBehaviour
     {
         if (startOpen)
         {
-            transform.eulerAngles = rotOpen;
+            SetOpen(true);
+            /*transform.eulerAngles = rotOpen;
             isOpen = true;
             if (canReClose)
             {
@@ -43,7 +44,7 @@ public class Door : MonoBehaviour
                 {
                     obstructedInteract.SetEnabled(false);
                 }
-            }
+            }*/
         }
     }
 
@@ -126,6 +127,14 @@ public class Door : MonoBehaviour
         else if (!isOpen)
         {
             unobstructedInteract.SetEnabled(true);
+        }
+        else
+        {
+            unobstructedInteract.SetEnabled(false);
+            if (obstructedInteract != null)
+            {
+                obstructedInteract.SetEnabled(false);
+            }
         }
     }
 

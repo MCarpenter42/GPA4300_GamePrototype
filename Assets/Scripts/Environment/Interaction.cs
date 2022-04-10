@@ -20,6 +20,7 @@ public class Interaction : CoreFunctionality
 
     public bool isEnabled { get; protected set; }
     [SerializeField] protected UnityEvent interactEvent;
+    [SerializeField] protected bool startEnabled = true;
 
     protected GameObject indicator;
 
@@ -55,6 +56,10 @@ public class Interaction : CoreFunctionality
     {
         SetIcon(startIcon);
         GetPlayer();
+        if (!startEnabled)
+        {
+            isEnabled = false;
+        }
     }
 
     protected void Update()
