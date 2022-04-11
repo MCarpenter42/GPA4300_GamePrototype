@@ -7,9 +7,12 @@ public class CoreFunctionality : MonoBehaviour
 {
     #region [ PARAMETERS ]
 
+    public enum ItemNames { emptyItem, basicKey, emerald, lockpickPins };
     public static Controls controls = new Controls();
     public static Settings settings = new Settings();
     public static ItemDatabase itemDB = new ItemDatabase();
+
+    public enum rotVectors { X, Y, Z };
 
     #endregion
 
@@ -17,12 +20,14 @@ public class CoreFunctionality : MonoBehaviour
 
     public static void Pause()
     {
+        GameManager.state.isPaused = true;
         Time.timeScale = 0.0f;
     }
 
     public static void Resume()
     {
         Time.timeScale = 1.0f;
+        GameManager.state.isPaused = false;
     }
 
     public static float ToRad(float degrees)
@@ -33,6 +38,30 @@ public class CoreFunctionality : MonoBehaviour
     public static float ToDeg(float radians)
     {
         return radians * 180.0f / Mathf.PI;
+    }
+
+    public static int ToInt(bool intBool)
+    {
+        if (intBool)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public static bool ToBool(int boolInt)
+    {
+        if (boolInt > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static string[] StopwatchTime(float time)

@@ -234,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8821876774582888916}
-  - component: {fileID: 2655651107831220330}
+  - component: {fileID: 1410080191114991554}
   m_Layer: 0
   m_Name: LockedInteractionHandler
   m_TagString: Untagged
@@ -257,7 +257,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2655651107831220330
+--- !u!114 &1410080191114991554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,32 +266,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8821876774582888919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603ec3e03c630b84cbbad4adf6b9564f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d4c2480aaf57fd4dadfe1d3a71824e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  startEnabled: 1
   press: {fileID: 21300000, guid: 11fc725f65e0f3b4a981a2cdcf20789f, type: 3}
   pickup: {fileID: 21300000, guid: 3b3e0cc5128a7f04290a360ce4513420, type: 3}
   push: {fileID: 21300000, guid: 38a087a118ae16d4f9ebd60ad4a3d175, type: 3}
   locked: {fileID: 21300000, guid: 6c9a1c2961cfd5848b6a1cd38c05a022, type: 3}
-  unlock: {fileID: 21300000, guid: 6c9a1c2961cfd5848b6a1cd38c05a022, type: 3}
-  startIcon: 0
-  keyID: 0
-  keysTried: 
+  unlock: {fileID: 21300000, guid: 93bed5641eaddb446909ba002ab54b3f, type: 3}
+  startIcon: 4
+  unlockedIcon: 0
+  keyItemID: 0
 --- !u!1 &8821876775741376748
 GameObject:
   m_ObjectHideFlags: 0

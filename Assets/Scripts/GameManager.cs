@@ -8,6 +8,8 @@ public class GameManager : CoreFunctionality
 {
     private static GameManager instance = null;
 
+    public static GameState state;
+
     #region [ PARAMETERS ]
 
     private bool setupRun = false;
@@ -90,5 +92,22 @@ public class GameManager : CoreFunctionality
     private void OnStartDebugging()
     {
 
+    }
+}
+
+public class GameState
+{
+    public bool isPaused;
+
+    public GameState()
+    {
+        if (Time.timeScale > 0.0f)
+        {
+            isPaused = false;
+        }
+        else
+        {
+            isPaused = true;
+        }
     }
 }

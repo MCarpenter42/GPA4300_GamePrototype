@@ -10,7 +10,9 @@ public class LockedInteract : Interaction
     public bool isLocked { get; private set; }
     [SerializeField] int unlockedIcon;
 
-    [SerializeField] int keyItemID;
+    [Header("Key item")]
+    [SerializeField] ItemNames keyItemID;
+    private int invenSlot;
     private List<int> keysTried = new List<int>();
 
     #endregion
@@ -35,12 +37,14 @@ public class LockedInteract : Interaction
         {
             if (isLocked)
             {
-                bool hasKey = player.Inventory.CheckForItem(keyItemID);
-                if (hasKey)
+                int[] hasKey = player.Inventory.CheckForItem((int)keyItemID, true);
+                if (ToBool(hasKey[0]))
                 {
                     Debug.Log("Unlocked!");
                     isLocked = false;
-                    interactEvent.Invoke();
+                    SetIcon(unlockedIcon);
+                    //interactEvent.Invoke();
+                    CheckKeyBreak(hasKey[1]);
                 }
                 else
                 {
@@ -58,5 +62,13 @@ public class LockedInteract : Interaction
     public void SetLockState(bool lockState)
     {
         isLocked = lockState;
+    }
+
+    private void CheckKeyBreak(int index)
+    {
+        if (itemDB.items[(int)keyItemID].breakWhenUsed)
+        {
+            player.Inventory.SetSlot(index, 0);
+        }
     }
 }

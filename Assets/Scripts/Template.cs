@@ -18,7 +18,7 @@ public class Template : CoreFunctionality
     #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
+/*
     void Awake()
     {
         
@@ -38,7 +38,7 @@ public class Template : CoreFunctionality
     {
         
     }
-
+*/
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 

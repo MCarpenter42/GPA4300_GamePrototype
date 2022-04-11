@@ -28,7 +28,7 @@ public class Inventory : CoreFunctionality
                 break;
             }
         }
-        Debug.Log("Item of ID " + id + " (\"" + itemDB.items[id].name + "\") added to inventory slot " + i + ".");
+        //Debug.Log("Item of ID " + id + " (\"" + itemDB.items[id].name + "\") added to inventory slot " + i + ".");
         invenFrame.UpdateIcons();
         return itemAdded;
     }
@@ -44,6 +44,25 @@ public class Inventory : CoreFunctionality
             }
         }
         return isPresent;
+    }
+    
+    public int[] CheckForItem(int id, bool returnSlot)
+    {
+        int isPresent = 0;
+        int slot = -1;
+        for (int i = 0; i < items.Length; i++)
+        {
+            int itemID = items[i];
+            if (itemID == id)
+            {
+                isPresent = 1;
+                slot = i;
+            }
+        }
+
+        int[] output = new int[] { isPresent, slot };
+
+        return output;
     }
 
     public void SwitchSlots(int slot1_pos, int slot2_pos)
@@ -68,5 +87,11 @@ public class Inventory : CoreFunctionality
         {
             return new string[] { "<INVALID_ID>", "", "Images/Sprites/InventoryIcons/EmptyIcon" };
         }
+    }
+
+    public void SetSlot(int index, int value)
+    {
+        items[index] = value;
+        invenFrame.UpdateIcons();
     }
 }

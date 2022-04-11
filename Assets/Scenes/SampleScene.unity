@@ -5429,17 +5429,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
---- !u!114 &912198310 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2655651107831220330, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
-  m_PrefabInstance: {fileID: 912198309}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603ec3e03c630b84cbbad4adf6b9564f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &912198311 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8821876774582888916, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
@@ -5995,7 +5984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88d80bb11001ea4b9038bd4c24f5fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 3
 --- !u!4 &993846733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fdd401c3796796347a952d713cbdafba, type: 3}
@@ -11334,11 +11322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a897108b5230f5740832d0d5d1465aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canReClose: 0
-  unobstructedInteract: {fileID: 912198310}
-  obstructedInteract: {fileID: 0}
-  rotOpen: {x: 0, y: -90, z: 0}
-  startOpen: 1
 --- !u!1 &1967903844
 GameObject:
   m_ObjectHideFlags: 0
@@ -11598,7 +11581,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2055856780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66535e5f5de4ea845829c33cb0836c01, type: 3}
+  m_Script: {fileID: 11500000, guid: e008ca4ebb85be54c9ce5222c8a5d519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2055856782
