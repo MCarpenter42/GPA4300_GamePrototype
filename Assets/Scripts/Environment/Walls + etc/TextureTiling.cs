@@ -25,8 +25,14 @@ public class TextureTiling : MonoBehaviour
         surfaceMat.mainTextureOffset = textureOffset;
     }
 
+    void Update()
+    {
+        surfaceMat.mainTextureScale = faceSize * matScaleFactor;
+        surfaceMat.mainTextureOffset = textureOffset;
+    }
+
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	
+
     private void GetFaceSize()
     {
         Vector3 scale = gameObject.transform.localScale;
