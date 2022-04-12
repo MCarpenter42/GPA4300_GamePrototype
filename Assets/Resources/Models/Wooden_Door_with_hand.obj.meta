@@ -3,7 +3,17 @@ guid: ae936a223ab659244abfcb7755d8fca7
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DoorMat
+    second: {fileID: 2100000, guid: 408550be9c2d17846be572d7b60130ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HandMat
+    second: {fileID: 2100000, guid: cd42dafa08b04fe4392358c50cd3a26f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -34,7 +44,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.0316
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -63,7 +73,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +95,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.0316
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

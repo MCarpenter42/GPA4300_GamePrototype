@@ -11,6 +11,8 @@ public class TextureTiling : MonoBehaviour
     private Material surfaceMat;
     private float matScaleFactor = 0.2f;
 
+    [SerializeField] Vector2 textureOffset;
+
 	#endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -20,6 +22,7 @@ public class TextureTiling : MonoBehaviour
         surfaceMat = gameObject.GetComponent<MeshRenderer>().materials[0];
         GetFaceSize();
         surfaceMat.mainTextureScale = faceSize * matScaleFactor;
+        surfaceMat.mainTextureOffset = textureOffset;
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

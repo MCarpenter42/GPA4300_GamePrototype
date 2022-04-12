@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5559639486412515549}
+  - component: {fileID: 2348090922746707819}
   m_Layer: 0
   m_Name: Hanging Lantern
   m_TagString: Untagged
@@ -32,6 +33,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2348090922746707819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5559639486412515548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff438742d5408f44a7e66a77bcaa97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightSource: {fileID: 5559639487727870121}
+  startLit: 1
 --- !u!1 &5559639487727870121
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,14 +89,14 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.8519765, b: 0.4669811, a: 1}
-  m_Intensity: 0.5
-  m_Range: 50
+  m_Color: {r: 1, g: 0.87564564, b: 0.5330188, a: 1}
+  m_Intensity: 2
+  m_Range: 25
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1

@@ -7,7 +7,7 @@ public class ItemObject : CoreFunctionality
 {
 	#region [ PARAMETERS ]
 	
-    [SerializeField] int itemID = -1;
+    [SerializeField] ItemNames itemID;
 
     private Player player;
 
@@ -29,7 +29,7 @@ public class ItemObject : CoreFunctionality
 
     public void Pickup(Interaction interact)
     {
-        bool pickedUp = player.Inventory.AddItem(itemID);
+        bool pickedUp = player.Inventory.AddItem((int)itemID);
         if (pickedUp)
         {
             interact.SetEnabled(false);

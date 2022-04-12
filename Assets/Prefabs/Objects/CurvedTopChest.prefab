@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &2288940166661333002
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5959642392553971068}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.168734, y: 0.05, z: 0.6202445}
-  m_Center: {x: 0, y: 0.025, z: 0}
 --- !u!65 &476535825093305806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52,6 +39,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1687337, y: 0.4831754, z: 0.08}
   m_Center: {x: 0, y: 0.24158764, z: 0.2701223}
+--- !u!65 &2288940166661333002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5959642392553971068}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.168734, y: 0.05, z: 0.6202445}
+  m_Center: {x: 0, y: 0.025, z: 0}
 --- !u!65 &8125993744115477614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114,13 +114,13 @@ MonoBehaviour:
   lid: {fileID: 1444648320422732535}
   openAngle: 0
   hingeVector: 0
-  invertOpen: 0
+  invertOpen: 1
   autoClose: 0
   closeDelay: 0
   openTime: 0.8
   closeTime: 0
   interact: {fileID: 5542246549264905335}
-  lockInteract: {fileID: 2057794704265063453}
+  lockInteract: {fileID: 0}
 --- !u!1001 &3929278460066373026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821876774582888919, guid: beb0541c836206840ab817a5bb55408a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8821876775741376749, guid: beb0541c836206840ab817a5bb55408a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -233,6 +233,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6806503641059590458}
     m_Modifications:
+    - target: {fileID: 1410080191114991554, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410080191114991554, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410080191114991554, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8372993080545468542}
+    - target: {fileID: 1410080191114991554, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410080191114991554, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410080191114991554, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Chest, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410080191114991554, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410080191114991554, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
+      propertyPath: interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2655651107831220330, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
       propertyPath: startIcon
       value: 4
@@ -328,17 +360,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8821876774582888916, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
   m_PrefabInstance: {fileID: 4058875749455701111}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2057794704265063453 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2655651107831220330, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
-  m_PrefabInstance: {fileID: 4058875749455701111}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 603ec3e03c630b84cbbad4adf6b9564f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6806503641206546477
 PrefabInstance:
   m_ObjectHideFlags: 0
