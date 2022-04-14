@@ -26,6 +26,7 @@ public class Player : CoreFunctionality
     [SerializeField] float maxSpeed = 3.0f;
     [SerializeField] float sprintFactor = 2.0f;
     private Vector3 moveFactors = new Vector3();
+    private float defaultDrag;
 
     private bool isOnFloor = false;
     [SerializeField] float jumpStrength = 2.0f;
@@ -51,6 +52,7 @@ public class Player : CoreFunctionality
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        defaultDrag = rb.drag;
         SetCamera();
         rotFactor = (float)settings.control.lookSensitivity * 0.20f;
         CheckCamInvert();
@@ -70,7 +72,6 @@ public class Player : CoreFunctionality
         LookControl();
         MoveControl();
         InteractCheck();
-        Debug.Log(isOnFloor);
     }
 
     void FixedUpdate()
@@ -203,6 +204,7 @@ public class Player : CoreFunctionality
         Vector3 relVel = transform.InverseTransformDirection(velocityFlat);
         Vector3 decelForce = new Vector3(0.0f, 0.0f, 0.0f);
         float decelFactor = 8.0f;
+        float dragFactor = 1.0f;
 
         if (isOnFloor)
         {
@@ -228,11 +230,16 @@ public class Player : CoreFunctionality
                     decelForce += transform.right * maxSpeed * decelFactor;
                 }
             }
+            /*if (moveFactors[2] == 0.0f && moveFactors[0] == 0.0f)
+            {
+                decelFactor = 50.0f;
+            }*/
         }
 
         Vector3 lateralForce = transform.forward * moveFactors[2] + transform.right * moveFactors[0];
         lateralForce += decelForce;
         rb.AddForce(lateralForce);
+        //rb.drag = defaultDrag * dragFactor;
 
         if (relVel.magnitude < 0.05f)
         {

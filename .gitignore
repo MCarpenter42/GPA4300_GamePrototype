@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 # Manually added BATCH files for the purpose of automating pulls and pushes
 *.bat
+
+# Editor user settings because the fact that Git keeps overriding these is annoying
+EditorUserSettings.asset

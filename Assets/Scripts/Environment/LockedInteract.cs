@@ -40,10 +40,8 @@ public class LockedInteract : Interaction
                 int[] hasKey = player.Inventory.CheckForItem((int)keyItemID, true);
                 if (ToBool(hasKey[0]))
                 {
-                    Debug.Log("Unlocked!");
                     isLocked = false;
                     SetIcon(unlockedIcon);
-                    //interactEvent.Invoke();
                     CheckKeyBreak(hasKey[1]);
                 }
                 else
