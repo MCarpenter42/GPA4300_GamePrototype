@@ -70,6 +70,7 @@ public class Player : CoreFunctionality
         LookControl();
         MoveControl();
         InteractCheck();
+        Debug.Log(isOnFloor);
     }
 
     void FixedUpdate()
@@ -120,35 +121,39 @@ public class Player : CoreFunctionality
         {
             movMulti *= sprintFactor;
         }
-
         float fwdFactor = 0;
         float rhtFactor = 0;
-        if (Input.GetKey(controls.movement.forward))
+        if (isOnFloor)
         {
-            fwdFactor += maxSpeed * movMulti;
-        }
-        if (Input.GetKey(controls.movement.back))
-        {
-            fwdFactor -= maxSpeed * movMulti;
-        }
-        if (Input.GetKey(controls.movement.right))
-        {
-            rhtFactor += maxSpeed * movMulti;
-        }
-        if (Input.GetKey(controls.movement.left))
-        {
-            rhtFactor -= maxSpeed * movMulti;
-        }
-        moveFactors[2] = fwdFactor;
-        moveFactors[0] = rhtFactor;
+            if (Input.GetKey(controls.movement.forward))
+            {
+                fwdFactor += maxSpeed * movMulti;
+            }
+            if (Input.GetKey(controls.movement.back))
+            {
+                fwdFactor -= maxSpeed * movMulti;
+            }
+            if (Input.GetKey(controls.movement.right))
+            {
+                rhtFactor += maxSpeed * movMulti;
+            }
+            if (Input.GetKey(controls.movement.left))
+            {
+                rhtFactor -= maxSpeed * movMulti;
+            }
+            moveFactors[2] = fwdFactor;
+            moveFactors[0] = rhtFactor;
 
-        if (isOnFloor && Input.GetKeyDown(controls.movement.jump))
-        {
-            moveFactors[1] = jumpStrength;
+            if (Input.GetKeyDown(controls.movement.jump))
+            {
+                moveFactors[1] = jumpStrength;
+            }
         }
         else if (!isOnFloor)
         {
+            moveFactors[0] = 0.0f;
             moveFactors[1] = 0.0f;
+            moveFactors[2] = 0.0f;
         }
     }
 
@@ -199,26 +204,29 @@ public class Player : CoreFunctionality
         Vector3 decelForce = new Vector3(0.0f, 0.0f, 0.0f);
         float decelFactor = 8.0f;
 
-        if (moveFactors[2] == 0.0f && (relVel[2] > 0.05f || relVel[2] < -0.05f))
+        if (isOnFloor)
         {
-            if (relVel[2] > 0.0f)
+            if (moveFactors[2] == 0.0f && (relVel[2] > 0.05f || relVel[2] < -0.05f))
             {
-                decelForce -= transform.forward * maxSpeed * decelFactor;
+                if (relVel[2] > 0.0f)
+                {
+                    decelForce -= transform.forward * maxSpeed * decelFactor;
+                }
+                else
+                {
+                    decelForce += transform.forward * maxSpeed * decelFactor;
+                }
             }
-            else
+            if (moveFactors[0] == 0.0f && (relVel[0] > 0.05f || relVel[0] < -0.05f))
             {
-                decelForce += transform.forward * maxSpeed * decelFactor;
-            }
-        }
-        if (moveFactors[0] == 0.0f && (relVel[0] > 0.05f || relVel[0] < -0.05f))
-        {
-            if (relVel[0] > 0.0f)
-            {
-                decelForce -= transform.right * maxSpeed * decelFactor;
-            }
-            else
-            {
-                decelForce += transform.right * maxSpeed * decelFactor;
+                if (relVel[0] > 0.0f)
+                {
+                    decelForce -= transform.right * maxSpeed * decelFactor;
+                }
+                else
+                {
+                    decelForce += transform.right * maxSpeed * decelFactor;
+                }
             }
         }
 
@@ -250,7 +258,7 @@ public class Player : CoreFunctionality
         }
 
         Vector3 flatVel = new Vector3(rb.velocity[0], 0.0f, rb.velocity[2]);
-        if (flatVel.magnitude > maxSpeed * movMulti)
+        if (flatVel.magnitude > maxSpeed * movMulti && isOnFloor)
         {
             Vector3 newVel = flatVel.normalized * maxSpeed * movMulti + new Vector3(0.0f, rb.velocity[1], 0.0f);
             rb.velocity = newVel;
