@@ -48,16 +48,6 @@ public class Door : MonoBehaviour
         if (startOpen)
         {
             SetOpen(true);
-            /*transform.eulerAngles = rotOpen;
-            isOpen = true;
-            if (canReClose)
-            {
-                unobstructedInteract.SetEnabled(true);
-                if (obstructedInteract != null)
-                {
-                    obstructedInteract.SetEnabled(false);
-                }
-            }*/
         }
     }
 
@@ -98,6 +88,10 @@ public class Door : MonoBehaviour
     {
         isMoving = true;
 
+        if (unobstructedInteract != null)
+        {
+            unobstructedInteract.SetEnabled(false);
+        }
         if (obstructedInteract != null)
         {
             obstructedInteract.SetEnabled(false);
@@ -128,24 +122,25 @@ public class Door : MonoBehaviour
             }
         }
 
-        if (canReClose)
+        if (isOpen)
         {
-            unobstructedInteract.SetEnabled(true);
-            if (!isOpen && obstructedInteract != null)
+            if (canReClose)
             {
-                obstructedInteract.SetEnabled(true);
+                if (unobstructedInteract != null)
+                {
+                    unobstructedInteract.SetEnabled(true);
+                }
             }
-        }
-        else if (!isOpen)
-        {
-            unobstructedInteract.SetEnabled(true);
         }
         else
         {
-            unobstructedInteract.SetEnabled(false);
+            if (unobstructedInteract != null)
+            {
+                unobstructedInteract.SetEnabled(true);
+            }
             if (obstructedInteract != null)
             {
-                obstructedInteract.SetEnabled(false);
+                obstructedInteract.SetEnabled(true);
             }
         }
     }

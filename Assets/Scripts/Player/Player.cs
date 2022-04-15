@@ -204,7 +204,6 @@ public class Player : CoreFunctionality
         Vector3 relVel = transform.InverseTransformDirection(velocityFlat);
         Vector3 decelForce = new Vector3(0.0f, 0.0f, 0.0f);
         float decelFactor = 8.0f;
-        float dragFactor = 1.0f;
 
         if (isOnFloor)
         {
@@ -230,16 +229,11 @@ public class Player : CoreFunctionality
                     decelForce += transform.right * maxSpeed * decelFactor;
                 }
             }
-            /*if (moveFactors[2] == 0.0f && moveFactors[0] == 0.0f)
-            {
-                decelFactor = 50.0f;
-            }*/
         }
 
         Vector3 lateralForce = transform.forward * moveFactors[2] + transform.right * moveFactors[0];
         lateralForce += decelForce;
         rb.AddForce(lateralForce);
-        //rb.drag = defaultDrag * dragFactor;
 
         if (relVel.magnitude < 0.05f)
         {
