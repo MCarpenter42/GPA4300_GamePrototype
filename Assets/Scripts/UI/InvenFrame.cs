@@ -83,7 +83,11 @@ public class InvenFrame : UI
         {
             Button btn = slotBtns[i];
             int n = i;
-            btn.onClick.AddListener(delegate{Debug.Log(n);});
+            btn.onClick.AddListener(
+                delegate{
+                    Debug.Log(player.Inventory.GetItemData(i)[0]);
+                }
+            );
         }
     }
 
@@ -110,5 +114,10 @@ public class InvenFrame : UI
             frame.SetActive(false);
         }
         invenVis = show;
+    }
+
+    public void TestDubug(string text)
+    {
+        Debug.Log(text);
     }
 }

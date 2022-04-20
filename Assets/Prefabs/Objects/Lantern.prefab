@@ -82,7 +82,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -140,6 +140,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightSource: {fileID: 4342756003949151555}
   startLit: 0
+  targetMesh: {fileID: 3135917329716638689}
+  targetMaterial: 1
+  litMaterial: {fileID: 2100000, guid: 3eebce2a5d3836d4ba3e34f92c322b77, type: 2}
+  unlitMaterial: {fileID: 0}
 --- !u!1001 &4342756003392188261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -216,5 +220,10 @@ PrefabInstance:
 --- !u!4 &4309426900383533198 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3412a11a12bc19b4d972f22274a95187, type: 3}
+  m_PrefabInstance: {fileID: 4342756003392188261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3135917329716638689 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 3412a11a12bc19b4d972f22274a95187, type: 3}
   m_PrefabInstance: {fileID: 4342756003392188261}
   m_PrefabAsset: {fileID: 0}

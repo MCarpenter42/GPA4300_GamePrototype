@@ -7,9 +7,16 @@ public class LightSource : CoreFunctionality
 {
     #region [ PARAMETERS ]
 
+    [Header("General Properties")]
     [SerializeField] GameObject lightSource;
     [SerializeField] bool startLit;
     private bool isLit;
+
+    [Header("Lit/Unlit Material")]
+    [SerializeField] MeshRenderer targetMesh;
+    [SerializeField] int targetMaterial = -1;
+    [SerializeField] Material litMaterial;
+    [SerializeField] Material unlitMaterial;
 
     #endregion
 
@@ -21,11 +28,19 @@ public class LightSource : CoreFunctionality
         {
             isLit = true;
             lightSource.SetActive(true);
+            if (targetMaterial > -1 && targetMaterial < targetMesh.materials.Length && litMaterial != null)
+            {
+                targetMesh.materials[targetMaterial].CopyPropertiesFromMaterial(litMaterial);
+            }
         }
         else
         {
             isLit = false;
             lightSource.SetActive(false);
+            if (targetMaterial > -1 && targetMaterial < targetMesh.materials.Length && unlitMaterial != null)
+            {
+                targetMesh.materials[targetMaterial].CopyPropertiesFromMaterial(unlitMaterial);
+            }
         }
     }
 
