@@ -88,6 +88,17 @@ public class CoreFunctionality : MonoBehaviour
         return new string[] { strMinutes, strSeconds, strSubSecs };
     }
 
+    public static int RandomInt(int valMin, int valMax)
+    {
+        float r = Random.Range(valMin, valMax + 1);
+        int i = Mathf.FloorToInt(r);
+        if (i > valMax)
+        {
+            i = valMax;
+        }
+        return i;
+    }
+
     public static List<T> ArrayToList<T>(T[] array)
     {
         List<T> listOut = new List<T>();
