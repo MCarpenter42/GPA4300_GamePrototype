@@ -9,6 +9,7 @@ public class InvenFrame : UI
 
     private GameObject frame;
     private List<Image> slots = new List<Image>();
+    private List<Button> slotBtns = new List<Button>();
 
     private Player player;
 
@@ -21,6 +22,7 @@ public class InvenFrame : UI
     void Awake()
     {
         GetComponents();
+        SetButtonFunctions();
     }
 
     void Start()
@@ -35,11 +37,6 @@ public class InvenFrame : UI
         {
             ShowInven(!invenVis);
         }
-    }
-
-    void FixedUpdate()
-    {
-        
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -61,17 +58,33 @@ public class InvenFrame : UI
         {
             GameObject slot = slotsContainer.transform.GetChild(i).gameObject;
             Image slotImg = null;
+            Button slotBtn = null;
             for (int j = 0; j < slot.transform.childCount; j++)
             {
-                if (slot.transform.GetChild(j).gameObject.GetComponent<Image>() != null)
+                if (slot.transform.GetChild(j).gameObject.CompareTag("Icon"))
                 {
                     slotImg = slot.transform.GetChild(j).gameObject.GetComponent<Image>();
                 }
+                else if (slot.transform.GetChild(j).gameObject.CompareTag("Button"))
+                {
+                    slotBtn = slot.transform.GetChild(j).gameObject.GetComponent<Button>();
+                }
             }
             slots.Add(slotImg);
+            slotBtns.Add(slotBtn);
         }
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    private void SetButtonFunctions()
+    {
+        for (int i = 0; i < slotBtns.Count; i++)
+        {
+            Button btn = slotBtns[i];
+            int n = i;
+            btn.onClick.AddListener(delegate{Debug.Log(n);});
+        }
     }
 
     public void UpdateIcons()
@@ -98,6 +111,4 @@ public class InvenFrame : UI
         }
         invenVis = show;
     }
-
-
 }
