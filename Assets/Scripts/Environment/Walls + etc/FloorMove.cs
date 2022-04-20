@@ -50,7 +50,7 @@ public class FloorMove : CoreFunctionality
         // Make sure to make it "listName.Count - 1", though, else you may hit a fringe case where
         // it tries to access a value at an index outside the list range
         // hold = Random.Range(0, 3);
-        hold = RandomInt(0, floors.Count);
+        hold = RandomInt(0, floors.Count - 1);
         floors[hold].transform.position = new Vector3(playzone.x, playzone.y, playzone.z);
         }
     }
