@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloorMove : MonoBehaviour
+public class FloorMove : CoreFunctionality
 {
     public GameObject floor1;
     public GameObject floor2;
@@ -45,11 +45,12 @@ public class FloorMove : MonoBehaviour
     // [I] Inital floor spawn when the game starts randomly selecting between three rooms
     void Start()
     {
-        GameObject[] floors = {floor1, floor2, floor3};
+        List<GameObject> floors = new List<GameObject> {floor1, floor2, floor3};
         // [M] If you switch to using lists, you can auto-generate the max value of the range!
         // Make sure to make it "listName.Count - 1", though, else you may hit a fringe case where
         // it tries to access a value at an index outside the list range
-        hold = Random.Range(0, 3);
+        // hold = Random.Range(0, 3);
+        hold = Random.Range(0, floors.Count);
         floors[hold].transform.position = new Vector3(playzone.x, playzone.y, playzone.z);
         }
     }
