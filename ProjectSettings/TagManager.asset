@@ -12,6 +12,7 @@ TagManager:
   - Name
   - Description
   - Additional
+  - Text
   layers:
   - Default
   - TransparentFX

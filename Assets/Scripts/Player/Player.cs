@@ -92,7 +92,7 @@ public class Player : CoreFunctionality
 
     private void LookControl()
     {
-        if (GameManager.isCursorLocked)
+        if (GameManager.isCursorLocked && !GameManager.state.isPaused)
         {
             camPitch += rotFactor * Input.GetAxis("Mouse Y") * (float)pitchDir;
             camYaw += rotFactor * Input.GetAxis("Mouse X");
@@ -337,6 +337,5 @@ public class Player : CoreFunctionality
 
         return closestInteract;
     }
-
 
 }

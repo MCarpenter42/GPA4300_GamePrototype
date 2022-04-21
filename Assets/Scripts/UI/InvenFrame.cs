@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using TMPro;
 
 public class InvenFrame : UI
 {
     #region [ PARAMETERS ]
 
-    private GameObject frame;
+    private FrameHandler frameHandler;
+
     private List<Image> slots = new List<Image>();
     private List<Button> slotBtns = new List<Button>();
 
     private GameObject tooltip;
+    private TextMeshProUGUI[] tooltipText;
+
+    public List<UnityEvent> clickEvents = new List<UnityEvent>();
 
     private Player player;
 
@@ -23,6 +29,9 @@ public class InvenFrame : UI
 
     void Awake()
     {
+        frameHandler = gameObject.AddComponent<FrameHandler>();
+        frameHandler.SetValues(false);
+        frameHandler.onShow = OnShow;
         GetComponents();
         SetButtonFunctions();
     }
@@ -45,9 +54,12 @@ public class InvenFrame : UI
 	
     private void GetComponents()
     {
-        frame = gameObject.transform.GetChild(0).gameObject;
+        frameHandler.GetComponents(gameObject);
+        frameHandler.onShow = OnShow;
 
+        GameObject frame = frameHandler.frames[0];
         GameObject slotsContainer = new GameObject();
+
         for (int i = 0; i < frame.transform.childCount; i++)
         {
             GameObject target = frame.transform.GetChild(i).gameObject;
@@ -58,8 +70,27 @@ public class InvenFrame : UI
             if (target.CompareTag("Tooltip"))
             {
                 tooltip = target;
+                Transform frameTransform = tooltip.transform.GetChild(0);
+                tooltipText = new TextMeshProUGUI[3];
+                for (int j = 0; j < frameTransform.childCount; j++)
+                {
+                    GameObject child = frameTransform.GetChild(j).gameObject;
+                    if (child.CompareTag("Name"))
+                    {
+                        tooltipText[0] = child.GetComponent<TextMeshProUGUI>();
+                    }
+                    else if (child.CompareTag("Description"))
+                    {
+                        tooltipText[1] = child.GetComponent<TextMeshProUGUI>();
+                    }
+                    else if (child.CompareTag("Additional"))
+                    {
+                        tooltipText[2] = child.GetComponent<TextMeshProUGUI>();
+                    }
+                }
             }
         }
+
         for (int i = 0; i < slotsContainer.transform.childCount; i++)
         {
             GameObject slot = slotsContainer.transform.GetChild(i).gameObject;
@@ -92,7 +123,7 @@ public class InvenFrame : UI
             int n = i;
             btn.onClick.AddListener(
                 delegate{
-                    Debug.Log(player.Inventory.GetItemData(i)[0]);
+                    CheckForClickEvent(n);
                 }
             );
         }
@@ -102,23 +133,26 @@ public class InvenFrame : UI
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            string spritePath = player.Inventory.GetItemData(i)[2];
+            string spritePath = player.Inventory.GetItemData(i).iconPath;
             slots[i].sprite = Resources.Load<Sprite>(spritePath);
         }
     }
 
     public void ShowInven(bool show)
     {
+        frameHandler.Show(show);
+    }
+
+    private void OnShow(bool show)
+    {
         if (show)
         {
             LockCursor(false);
-            frame.SetActive(true);
             UpdateIcons();
         }
         else
         {
             LockCursor(true);
-            frame.SetActive(false);
             tooltip.SetActive(false);
         }
         invenVis = show;
@@ -126,22 +160,64 @@ public class InvenFrame : UI
 
     public void ShowTooltip(int index)
     {
-        Debug.Log("Showing tooltip at slot " + index);
-        UpdateTooltip(index);
+        if (player.Inventory.GetItemID(index) > 0)
+        {
+            Vector3 newPos = slotBtns[index].transform.position;
+            tooltip.SetActive(true);
+            tooltip.transform.position = newPos;
+            UpdateTooltip(index);
+        }
     }
 
     public void HideTooltip()
     {
-        Debug.Log("Hiding tooltip");
+        tooltip.SetActive(false);
     }
 
     private void UpdateTooltip(int index)
     {
+        string name = player.Inventory.GetItemData(index).name;
+        string desc = player.Inventory.GetItemData(index).description;
+        string mInf = player.Inventory.GetItemData(index).moreInfo;
 
+        tooltipText[0].text = name;
+        tooltipText[1].text = desc;
+        tooltipText[2].text = mInf;
+
+        RectTransform ttFrameRect = tooltip.transform.GetChild(0).GetComponent<RectTransform>();
+        if (mInf == null)
+        {
+            ttFrameRect.sizeDelta = new Vector2(404.0f, 144.0f);
+        }
+        else
+        {
+            ttFrameRect.sizeDelta = new Vector2(404.0f, 176.0f);
+
+            Item itemData = player.Inventory.GetItemData(index);
+            FontStyles style = FontStyles.Normal;
+            if (itemData.moreInfoItalic)
+            {
+                style = FontStyles.Italic;
+            }
+            tooltipText[2].fontStyle = style;
+            tooltipText[2].color = itemData.moreInfoColour;
+        }
     }
 
-    public void TestDubug(string text)
+    private void CheckForClickEvent(int index)
     {
-        Debug.Log(text);
+        int eventID = player.Inventory.GetItemData(index).actionOnClick;
+        if (eventID > -1)
+        {
+            OnClickEvent(eventID);
+        }
+    }
+
+    public void OnClickEvent(int n)
+    {
+        if (InBounds(n, clickEvents))
+        {
+            clickEvents[n].Invoke();
+        }
     }
 }

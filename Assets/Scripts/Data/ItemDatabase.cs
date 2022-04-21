@@ -22,7 +22,6 @@ public class ItemDatabase
 			(
 				null,
 				null,
-				null,
 				"EmptyIcon",
 				false
 			),
@@ -31,7 +30,6 @@ public class ItemDatabase
 			(
 				"Iron Key",
 				"A simple iron key.",
-				null,
 				"Key1",
 				false
 			),
@@ -40,16 +38,14 @@ public class ItemDatabase
 			(
 				"Emerald",
 				"A highly polished green gemstone.",
-				null,
 				"Gem1",
 				false
 			),
 			// ID 3 - Lockpins
 			new Item
 			(
-				"Tough needles",
+				"Tough Needles",
 				"Might be able to be used as lockpicks.",
-				null,
 				"lockpins",
 				true
 			),
@@ -59,6 +55,9 @@ public class ItemDatabase
 				"Handwritten Note",
 				"A cryptic note written in spidery handwriting.",
 				"< Click to read >",
+				false,
+				Color.blue,
+				0,
 				"PaperSheet",
 				false
 			),
@@ -72,7 +71,13 @@ public class Item
 
 	public readonly string name;
 	public readonly string description;
+
 	public readonly string moreInfo;
+	public readonly bool moreInfoItalic;
+	public readonly Color moreInfoColour;
+
+	public readonly int actionOnClick;
+
 	public readonly string iconPath;
 
 	public readonly bool breakWhenUsed;
@@ -81,11 +86,50 @@ public class Item
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-	public Item(string name, string description, string moreInfo, string iconName, bool breakWhenUsed)
+	public Item(string name, string description, string iconName)
+    {
+		this.name = name;
+		this.description = description;
+		this.moreInfo = null;
+		this.moreInfoItalic = false;
+		this.moreInfoColour = Color.black;
+		this.actionOnClick = -1;
+		this.iconPath = "Images/Sprites/InventoryIcons/" + iconName;
+		this.breakWhenUsed = false;
+	}
+	
+	public Item(string name, string description, string iconName, bool breakWhenUsed)
+    {
+		this.name = name;
+		this.description = description;
+		this.moreInfo = null;
+		this.moreInfoItalic = false;
+		this.moreInfoColour = Color.black;
+		this.actionOnClick = -1;
+		this.iconPath = "Images/Sprites/InventoryIcons/" + iconName;
+		this.breakWhenUsed = breakWhenUsed;
+	}
+
+	public Item(string name, string description, string moreInfo, bool moreInfoItalic, Color moreInfoColour, string iconName, bool breakWhenUsed)
     {
 		this.name = name;
 		this.description = description;
 		this.moreInfo = moreInfo;
+		this.moreInfoItalic = moreInfoItalic;
+		this.moreInfoColour = moreInfoColour;
+		this.actionOnClick = -1;
+		this.iconPath = "Images/Sprites/InventoryIcons/" + iconName;
+		this.breakWhenUsed = breakWhenUsed;
+	}
+
+	public Item(string name, string description, string moreInfo, bool moreInfoItalic, Color moreInfoColour, int actionOnClick, string iconName, bool breakWhenUsed)
+    {
+		this.name = name;
+		this.description = description;
+		this.moreInfo = moreInfo;
+		this.moreInfoItalic = moreInfoItalic;
+		this.moreInfoColour = moreInfoColour;
+		this.actionOnClick = actionOnClick;
 		this.iconPath = "Images/Sprites/InventoryIcons/" + iconName;
 		this.breakWhenUsed = breakWhenUsed;
 	}

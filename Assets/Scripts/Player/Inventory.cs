@@ -74,19 +74,15 @@ public class Inventory : CoreFunctionality
         invenFrame.UpdateIcons();
     }
 
-    public string[] GetItemData(int index)
+    public int GetItemID(int index)
+    {
+        return this.items[index];
+    }
+
+    public Item GetItemData(int index)
     {
         int itemID = this.items[index];
-        if (itemID < itemDB.items.Count)
-        {
-            Item targetItem = itemDB.items[this.items[index]];
-            //Debug.Log("Data for slot " + index + " -\nItem ID: " + itemID);
-            return new string[] { targetItem.name, targetItem.description, targetItem.iconPath };
-        }
-        else
-        {
-            return new string[] { "<INVALID_ID>", "", "Images/Sprites/InventoryIcons/EmptyIcon" };
-        }
+        return itemDB.items[this.items[index]];
     }
 
     public void SetSlot(int index, int value)

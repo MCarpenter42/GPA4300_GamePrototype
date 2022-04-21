@@ -7,7 +7,7 @@ public class CoreFunctionality : MonoBehaviour
 {
     #region [ PARAMETERS ]
 
-    public enum ItemNames { emptyItem, basicKey, emerald, lockpickPins };
+    public enum ItemNames { emptyItem, basicKey, emerald, lockpickPins, noteA };
     public static Controls controls = new Controls();
     public static Settings settings = new Settings();
     public static ItemDatabase itemDB = new ItemDatabase();
@@ -22,10 +22,12 @@ public class CoreFunctionality : MonoBehaviour
     {
         GameManager.state.isPaused = true;
         Time.timeScale = 0.0f;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public static void Resume()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1.0f;
         GameManager.state.isPaused = false;
     }
@@ -97,6 +99,30 @@ public class CoreFunctionality : MonoBehaviour
             i = valMax;
         }
         return i;
+    }
+
+    public static bool InBounds<T>(int index, T[] array)
+    {
+        if (index > -1 && index < array.Length)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public static bool InBounds<T>(int index, List<T> list)
+    {
+        if (index > -1 && index < list.Count)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static List<T> ArrayToList<T>(T[] array)
