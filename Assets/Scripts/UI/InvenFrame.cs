@@ -11,6 +11,8 @@ public class InvenFrame : UI
     private List<Image> slots = new List<Image>();
     private List<Button> slotBtns = new List<Button>();
 
+    private GameObject tooltip;
+
     private Player player;
 
     private bool invenVis;
@@ -53,6 +55,10 @@ public class InvenFrame : UI
             {
                 slotsContainer = target;
             }
+            if (target.CompareTag("Tooltip"))
+            {
+                tooltip = target;
+            }
         }
         for (int i = 0; i < slotsContainer.transform.childCount; i++)
         {
@@ -68,6 +74,7 @@ public class InvenFrame : UI
                 else if (slot.transform.GetChild(j).gameObject.CompareTag("Button"))
                 {
                     slotBtn = slot.transform.GetChild(j).gameObject.GetComponent<Button>();
+                    slotBtn.gameObject.GetComponent<InvenSlot>().index = i;
                 }
             }
             slots.Add(slotImg);
@@ -112,8 +119,25 @@ public class InvenFrame : UI
         {
             LockCursor(true);
             frame.SetActive(false);
+            tooltip.SetActive(false);
         }
         invenVis = show;
+    }
+
+    public void ShowTooltip(int index)
+    {
+        Debug.Log("Showing tooltip at slot " + index);
+        UpdateTooltip(index);
+    }
+
+    public void HideTooltip()
+    {
+        Debug.Log("Hiding tooltip");
+    }
+
+    private void UpdateTooltip(int index)
+    {
+
     }
 
     public void TestDubug(string text)

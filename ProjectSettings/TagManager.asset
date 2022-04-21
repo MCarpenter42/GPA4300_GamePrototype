@@ -8,6 +8,10 @@ TagManager:
   - Slots
   - Icon
   - Button
+  - Tooltip
+  - Name
+  - Description
+  - Additional
   layers:
   - Default
   - TransparentFX
