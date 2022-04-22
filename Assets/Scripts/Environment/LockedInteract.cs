@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This version of the interaction handler script prevents interaction with it
+// unless the player has an item with the correct ID in their inventory.
+
 public class LockedInteract : Interaction
 {
     #region [ PARAMETERS ]
@@ -27,6 +30,8 @@ public class LockedInteract : Interaction
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+    // This overrides the default to prevent the interaction from
+    // triggering until unlocked.
     public override bool InteractEvent()
     {
         if (interactEvent == null)
@@ -37,6 +42,9 @@ public class LockedInteract : Interaction
         {
             if (isLocked)
             {
+                // When the player *does* have the correct key item, it
+                // unlocks and changes the icon on first keypress, then
+                // triggers normally after that.
                 int[] hasKey = player.Inventory.CheckForItem((int)keyItemID, true);
                 if (ToBool(hasKey[0]))
                 {
@@ -62,6 +70,8 @@ public class LockedInteract : Interaction
         isLocked = lockState;
     }
 
+    // If they key item's data says that it's meant to break when
+    // used, this makes sure that happens.
     private void CheckKeyBreak(int index)
     {
         if (itemDB.items[(int)keyItemID].breakWhenUsed)

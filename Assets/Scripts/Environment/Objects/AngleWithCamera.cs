@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
+// This script is literally just used in one place right now, which is
+// making sure that a candle flame is always oriented towards the player.
+
 public class AngleWithCamera : MonoBehaviour
 {
     #region [ PARAMETERS ]

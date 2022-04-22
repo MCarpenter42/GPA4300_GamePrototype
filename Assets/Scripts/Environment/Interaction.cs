@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+// This class is attached to the prefab object that handles player
+// interaction. It uses Unity's events system to be able to handle
+// anything it might be required to do - as long as the method is
+// public, the interaction handler can call it.
+
 public class Interaction : CoreFunctionality
 {
     #region [ PARAMETERS ]
@@ -24,6 +29,9 @@ public class Interaction : CoreFunctionality
 
     protected GameObject indicator;
 
+    // Having serialized sprites works just fine thanks to the
+    // fact that this script is only attached to a prefab - makes
+    // it a lot easier to pick the sprites for each interaction!
     Sprite[] icons;
     [SerializeField] protected Sprite press;
     [SerializeField] protected Sprite pickup;
@@ -90,6 +98,8 @@ public class Interaction : CoreFunctionality
         }
     }
 
+    // Allows the sprites to be selected by index, but also adds in the
+    // potential for a null option to act as a default sprite.
     protected void IconsToArray()
     {
         icons = new Sprite[]
@@ -103,6 +113,8 @@ public class Interaction : CoreFunctionality
         };
     }
 
+    // The next few methods all relate to the indicator sprite
+    // that displays in the world space.
     protected void GetIndicator()
     {
         GameObject target;
@@ -145,16 +157,21 @@ public class Interaction : CoreFunctionality
         }
     }
 
+    // Every interaction handler stores a reference to the player at the
+    // start, just in case. (This is mostly utilised by a child class.)
     protected void GetPlayer()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
+    // Allows the indicator to be easiler enabled & disabled without
+    // changing whether it's active.
     public void SetEnabled(bool enable)
     {
         isEnabled = enable;
     }
 
+    // Just in case the indicator's position needs to be modified at runtime.
     public void OffsetIndicator(Vector3 offset)
     {
         indicator.transform.position += offset;

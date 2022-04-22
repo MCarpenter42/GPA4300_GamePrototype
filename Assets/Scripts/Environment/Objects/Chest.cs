@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This class adds functionality to a chest object that allows the
+// lid to open and close smoothly. It's inteded for use with the
+// interaction handler, but it can also be triggered from elsewhere.
+
 public class Chest : CoreFunctionality
 {
     #region [ PARAMETERS ]
