@@ -959,7 +959,7 @@ MonoBehaviour:
   unobstructedInteract: {fileID: 533794156}
   obstructedInteract: {fileID: 0}
   rotOpen: {x: 0, y: -90, z: 0}
-  startOpen: 1
+  startOpen: 0
   canReClose: 0
   openTime: 0.8
   closeTime: 0
@@ -3953,7 +3953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &234602904
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20204,7 +20204,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1021910092}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 234602905}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1021910092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29056,7 +29068,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1409152101}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 234602905}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ReturntoStartMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1409152101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40010,8 +40034,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Close
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 15f6522489eadf14c85230829ba9832c, type: 2}
+  m_sharedMaterial: {fileID: 4913580509012968755, guid: 15f6522489eadf14c85230829ba9832c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

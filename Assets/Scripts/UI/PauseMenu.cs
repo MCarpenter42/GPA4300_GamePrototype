@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : UI
 {
@@ -84,5 +85,17 @@ public class PauseMenu : UI
     {
         frameHandler.ChangeFrame(index);
     }
+
+    public void ReturntoStartMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void ExitGame()
+    {
+        Debug.Log("Game Closed!");
+        Application.Quit();
+    }
+
 
 }
