@@ -121,6 +121,12 @@ MonoBehaviour:
   closeTime: 0
   interact: {fileID: 5542246549264905335}
   lockInteract: {fileID: 0}
+  openSound: {fileID: 8300000, guid: c68bd10d4fc9aea4bb736e7ea0bd1050, type: 3}
+  openPitchScale: 1.1
+  openVolumeScale: 1
+  closeSound: {fileID: 0}
+  closePitchScale: 1.1
+  closeVolumeScale: 1
 --- !u!1001 &3929278460066373026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,11 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821876774582888916, guid: beb0541c836206840ab817a5bb55408a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.94
       objectReference: {fileID: 0}
     - target: {fileID: 8821876774582888916, guid: beb0541c836206840ab817a5bb55408a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8821876774582888916, guid: beb0541c836206840ab817a5bb55408a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -206,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821876775741376749, guid: beb0541c836206840ab817a5bb55408a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb0541c836206840ab817a5bb55408a, type: 3}
@@ -307,11 +313,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821876774582888916, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.94
       objectReference: {fileID: 0}
     - target: {fileID: 8821876774582888916, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8821876774582888916, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -351,7 +357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8821876775741376749, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59daaca2ccd66347a79936432b77a7a, type: 3}

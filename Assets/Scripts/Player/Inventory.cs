@@ -9,6 +9,7 @@ public class Inventory : CoreFunctionality
 
     private int[] items = new int[30];
 
+    public Player player;
     public InvenFrame invenFrame;
     public HUD hud;
 
@@ -33,6 +34,7 @@ public class Inventory : CoreFunctionality
         if (hud != null)
         {
             string notifText = itemDB.items[id].name + " added to inventory.";
+            player.PlayClip(AudioSources.item, player.clipItemPickup);
             hud.Notification(notifText);
         }
         return itemAdded;

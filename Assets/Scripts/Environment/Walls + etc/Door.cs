@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Door : MonoBehaviour
+public class Door : CoreFunctionality
 {
     #region [ PARAMETERS ]
 
@@ -14,8 +14,8 @@ public class Door : MonoBehaviour
     private LockedInteract obLock = null;
 
     [Header("Attributes")]
-    private Vector3 rotClosed;
     [SerializeField] Vector3 rotOpen;
+    private Vector3 rotClosed;
     private bool isMoving = false;
 
     [SerializeField] bool startOpen;
@@ -28,7 +28,13 @@ public class Door : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] AudioClip openSound;
+    [SerializeField] float openPitchScale = 1.0f;
+    [SerializeField] float openVolumeScale = 1.0f;
     [SerializeField] AudioClip closeSound;
+    [SerializeField] float closePitchScale = 1.0f;
+    [SerializeField] float closeVolumeScale = 1.0f;
+
+    private Player player;
 
     #endregion
 
@@ -46,7 +52,9 @@ public class Door : MonoBehaviour
         {
             closeTime = openTime;
         }
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
+
     private void Start()
     {
         if (startOpen)
@@ -103,6 +111,17 @@ public class Door : MonoBehaviour
 
         Vector3 rotStart = GetRotPoints(opening)[0];
         Vector3 rotEnd = GetRotPoints(opening)[1];
+
+        if (opening)
+        {
+            rotEnd = rotOpen;
+            player.PlayClip(AudioSources.environment, openSound, openPitchScale, openVolumeScale);
+        }
+        else
+        {
+            rotEnd = rotClosed;
+            player.PlayClip(AudioSources.environment, closeSound, closePitchScale, closeVolumeScale);
+        }
 
         int aFrames = 80;
         float aDuration = RotTime(opening);

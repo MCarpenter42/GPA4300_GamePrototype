@@ -281,6 +281,9 @@ MonoBehaviour:
   startIcon: 4
   unlockedIcon: 0
   keyItemID: 0
+  unlockAudio: {fileID: 8300000, guid: a1e3309fe79a6eb45a37a327a1ac0b23, type: 3}
+  pitchScale: 1
+  volumeScale: 1
 --- !u!1 &8821876775741376748
 GameObject:
   m_ObjectHideFlags: 0

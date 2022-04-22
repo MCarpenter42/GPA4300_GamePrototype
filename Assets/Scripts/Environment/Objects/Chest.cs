@@ -36,7 +36,13 @@ public class Chest : CoreFunctionality
 
     [Header("Audio")]
     [SerializeField] AudioClip openSound;
+    [SerializeField] float openPitchScale = 1.0f;
+    [SerializeField] float openVolumeScale = 1.0f;
     [SerializeField] AudioClip closeSound;
+    [SerializeField] float closePitchScale = 1.0f;
+    [SerializeField] float closeVolumeScale = 1.0f;
+
+    private Player player;
 
     #endregion
 
@@ -53,6 +59,7 @@ public class Chest : CoreFunctionality
         {
             closeTime = openTime;
         }
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -118,10 +125,12 @@ public class Chest : CoreFunctionality
         if (opening)
         {
             rotEnd = rotOpen;
+            player.PlayClip(AudioSources.environment, openSound, openPitchScale, openVolumeScale);
         }
         else
         {
             rotEnd = rotClosed;
+            player.PlayClip(AudioSources.environment, closeSound, closePitchScale, closeVolumeScale);
         }
 
         if (rotStart.magnitude > 180.0f)

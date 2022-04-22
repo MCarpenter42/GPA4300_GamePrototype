@@ -18,6 +18,11 @@ public class LockedInteract : Interaction
     private int invenSlot;
     private List<int> keysTried = new List<int>();
 
+    [Header("Audio")]
+    [SerializeField] AudioClip unlockAudio;
+    [SerializeField] float pitchScale = 1.0f;
+    [SerializeField] float volumeScale = 1.0f;
+
     #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -50,6 +55,7 @@ public class LockedInteract : Interaction
                 {
                     isLocked = false;
                     SetIcon(unlockedIcon);
+                    player.PlayClip(AudioSources.environment, unlockAudio, pitchScale, volumeScale);
                     CheckKeyBreak(hasKey[1]);
                 }
                 else

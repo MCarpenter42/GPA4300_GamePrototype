@@ -7,7 +7,7 @@ public class Player : CoreFunctionality
 {
     #region [ PARAMETERS ]
 
-    // CAMERA & LOOKING
+    [Header("Camera")]
 
     [SerializeField] PlayerCam playerCam;
     private bool cursorLocked = false;
@@ -21,20 +21,20 @@ public class Player : CoreFunctionality
 
     private GameObject shadow;
 
-    // MOVEMENT
-
-    Rigidbody rb;
+    [Header("Movement")]
 
     [SerializeField] float maxSpeed = 3.0f;
     [SerializeField] float sprintFactor = 2.0f;
     [SerializeField] float crouchFactor = 0.6f;
+
+    Rigidbody rb;
     private Vector3 moveFactors = new Vector3();
     private float defaultDrag;
 
     private bool isOnFloor = false;
     [SerializeField] float jumpStrength = 2.0f;
 
-    // CROUCHING
+  //[Header("Crouching")]
 
     CapsuleCollider cldr;
 
@@ -42,9 +42,9 @@ public class Player : CoreFunctionality
     private float defaultHeight;
     private float crouchScale = 0.6f;
 
-    // INTERACTION
+    [Header("Interaction")]
 
-    List<Interaction> interacts;
+    private List<Interaction> interacts;
     [SerializeField] float interactRange = 3.0f;
     [SerializeField] float interactAngle = 10.0f;
     private bool canInteract = false;
@@ -52,22 +52,24 @@ public class Player : CoreFunctionality
     private Interaction intrClosest;
     private Interaction intrClosestPrev;
 
-    // INVENTORY
+  //[Header("Inventory")]
 
     public Inventory Inventory { get; private set; }
 
-    // AUDIO
+    [Header("Audio")]
+
+    public AudioClip clipCrouchLoop;
+    public AudioClip clipWalkLoop;
+    public AudioClip clipRunLoop;
+
+    public AudioClip clipItemPickup;
 
     private AudioSource[] sources = new AudioSource[4];
+    private float[] defaultPitch = new float[4];
+    private float[] defaultVolume = new float[4];
 
     private AudioSource moveSFX;
-    [SerializeField] AudioClip crouchLoop;
-    [SerializeField] AudioClip walkLoop;
-    [SerializeField] AudioClip runLoop;
-
     private AudioSource itemSFX;
-    [SerializeField] AudioClip itemPickup;
-
     private AudioSource ambientSFX;
     private AudioSource environmentSFX;
 
@@ -283,7 +285,7 @@ public class Player : CoreFunctionality
         lateralForce += decelForce;
         rb.AddForce(lateralForce);
 
-        if (relVel.magnitude < 0.05f)
+        if (relVel.magnitude < 0.08f)
         {
             Vector3 newVel = new Vector3(0.0f, rb.velocity[1], 0.0f);
             rb.velocity = newVel;
@@ -324,15 +326,15 @@ public class Player : CoreFunctionality
     {
         if (Input.GetKey(controls.movement.crouch))
         {
-            moveSFX.clip = crouchLoop;
+            moveSFX.clip = clipCrouchLoop;
         }
         else if (Input.GetKey(controls.movement.sprint))
         {
-            moveSFX.clip = runLoop;
+            moveSFX.clip = clipRunLoop;
         }
         else
         {
-            moveSFX.clip = walkLoop;
+            moveSFX.clip = clipWalkLoop;
         }
 
         if (isOnFloor)
@@ -354,9 +356,20 @@ public class Player : CoreFunctionality
 
     public void PlayClip(AudioSources source, AudioClip clip)
     {
-        itemSFX.PlayOneShot(itemPickup);
+        AudioSource useSource = sources[(int)source];
+        useSource.pitch = defaultPitch[(int)source];
+        useSource.volume = defaultVolume[(int)source];
+        useSource.PlayOneShot(clip);
     }
-
+    
+    public void PlayClip(AudioSources source, AudioClip clip, float pitchScale, float volumeScale)
+    {
+        AudioSource useSource = sources[(int)source];
+        useSource.pitch = defaultPitch[(int)source] * pitchScale;
+        useSource.volume = defaultVolume[(int)source] * volumeScale;
+        useSource.PlayOneShot(clip);
+    }
+    
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
     private void GetComponents()
@@ -372,6 +385,7 @@ public class Player : CoreFunctionality
         CheckCamInvert();
 
         this.Inventory = new Inventory();
+        Inventory.player = this;
         Inventory.invenFrame = FindObjectOfType<InvenFrame>();
         Inventory.hud = FindObjectOfType<HUD>();
 
@@ -399,9 +413,20 @@ public class Player : CoreFunctionality
         }
 
         sources[0] = moveSFX;
+        defaultPitch[0] = moveSFX.pitch;
+        defaultVolume[0] = moveSFX.volume;
+
         sources[1] = itemSFX;
+        defaultPitch[1] = itemSFX.pitch;
+        defaultVolume[1] = itemSFX.volume;
+
         sources[2] = ambientSFX;
+        defaultPitch[2] = ambientSFX.pitch;
+        defaultVolume[2] = ambientSFX.volume;
+
         sources[3] = environmentSFX;
+        defaultPitch[3] = environmentSFX.pitch;
+        defaultVolume[3] = environmentSFX.volume;
     }
 
     private void GetInteractions()

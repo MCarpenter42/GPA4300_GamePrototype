@@ -51,10 +51,16 @@ MonoBehaviour:
   invertOpen: 1
   autoClose: 0
   closeDelay: 0
-  openTime: 1.2
+  openTime: 2
   closeTime: 0
   interact: {fileID: 8632347667826363865}
   lockInteract: {fileID: 0}
+  openSound: {fileID: 8300000, guid: c68bd10d4fc9aea4bb736e7ea0bd1050, type: 3}
+  openPitchScale: 0.6
+  openVolumeScale: 1.6
+  closeSound: {fileID: 8300000, guid: c68bd10d4fc9aea4bb736e7ea0bd1050, type: 3}
+  closePitchScale: 0.6
+  closeVolumeScale: 1.6
 --- !u!1001 &982304066602165260
 PrefabInstance:
   m_ObjectHideFlags: 0
