@@ -51,6 +51,8 @@ public class Chest : CoreFunctionality
 
     private void GetRotValues()
     {
+        rotClosed = lid.transform.localEulerAngles;
+
         int inv;
         if (invertOpen)
         {
@@ -61,7 +63,6 @@ public class Chest : CoreFunctionality
             inv = 1;
         }
 
-        rotClosed = lid.transform.localEulerAngles;
         if (hingeVector == rotVectors.X)
         {
             rotVector = new Vector3(1.0f, 0.0f, 0.0f);
@@ -74,7 +75,7 @@ public class Chest : CoreFunctionality
         {
             rotVector = new Vector3(0.0f, 0.0f, 1.0f);
         }
-        rotOpen = rotVector * openAngle * inv;
+        rotOpen = rotClosed + rotVector * openAngle * inv;
     }
 
     public void SetOpen(bool open)
@@ -115,10 +116,18 @@ public class Chest : CoreFunctionality
             rotEnd = rotClosed;
         }
 
+        Debug.Log(rotStart + " | " + rotEnd);
+
         if (rotStart.magnitude > 180.0f)
         {
             float x = rotStart.magnitude - 360.0f;
             rotStart = rotVector * x;
+        }
+        
+        if (rotEnd.magnitude > 180.0f)
+        {
+            float x = rotEnd.magnitude - 360.0f;
+            rotEnd = rotVector * x;
         }
 
         if (opening && interact != null && interact.gameObject.activeSelf)

@@ -16,20 +16,10 @@ public class PlayerCam : CoreFunctionality
 
     void Awake()
     {
-        
-    }
-
-    void Start()
-    {
-
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
-    {
-
-    }
-
-    void FixedUpdate()
     {
         FollowPosition();
     }

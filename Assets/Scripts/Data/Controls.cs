@@ -33,7 +33,7 @@ public class Controls_Movement
     public string right = "d";
     public string jump = "space";
     public string sprint = "left shift";
-    public string crouch = " left ctrl";
+    public string crouch = "left ctrl";
 }
 
 public class Controls_Actions

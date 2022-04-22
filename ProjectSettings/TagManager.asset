@@ -13,6 +13,7 @@ TagManager:
   - Description
   - Additional
   - Text
+  - Shadow
   layers:
   - Default
   - TransparentFX

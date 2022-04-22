@@ -48,8 +48,8 @@ MonoBehaviour:
   lightSource: {fileID: 5559639487727870121}
   startLit: 1
   targetMesh: {fileID: 6550022805734749589}
-  targetMaterial: 1
-  litMaterial: {fileID: 0}
+  targetMaterial: 2
+  litMaterial: {fileID: 2100000, guid: 3eebce2a5d3836d4ba3e34f92c322b77, type: 2}
   unlitMaterial: {fileID: 0}
 --- !u!1 &5559639487727870121
 GameObject:

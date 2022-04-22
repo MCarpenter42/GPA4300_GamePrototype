@@ -19,17 +19,28 @@ public class Player : CoreFunctionality
     public bool invertPitch;
     private int pitchDir;
 
+    private GameObject shadow;
+
     // MOVEMENT
 
     Rigidbody rb;
 
     [SerializeField] float maxSpeed = 3.0f;
     [SerializeField] float sprintFactor = 2.0f;
+    [SerializeField] float crouchFactor = 0.6f;
     private Vector3 moveFactors = new Vector3();
     private float defaultDrag;
 
     private bool isOnFloor = false;
     [SerializeField] float jumpStrength = 2.0f;
+
+    // CROUCHING
+
+    CapsuleCollider cldr;
+
+    private Coroutine heightTransition;
+    private float defaultHeight;
+    private float crouchScale = 0.6f;
 
     // INTERACTION
 
@@ -51,13 +62,7 @@ public class Player : CoreFunctionality
 
     void Awake()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
-        defaultDrag = rb.drag;
-        SetCamera();
-        rotFactor = (float)settings.control.lookSensitivity * 0.20f;
-        CheckCamInvert();
-        this.Inventory = new Inventory();
-        Inventory.invenFrame = FindObjectOfType<InvenFrame>();
+        GetComponents();
     }
     
     void Start()
@@ -70,13 +75,13 @@ public class Player : CoreFunctionality
     void Update()
     {
         LookControl();
+        CrouchControl();
         MoveControl();
         InteractCheck();
     }
 
     void FixedUpdate()
     {
-        playerCam.SetRot(new Vector3(camPitch, camYaw, 0.0f));
         MovementPhysics();
     }
 
@@ -113,15 +118,42 @@ public class Player : CoreFunctionality
 
         // Set player object orientation
         transform.eulerAngles = new Vector3(0.0f, camYaw, 0.0f);
+
+        Camera();
+    }
+    
+    private void CrouchControl()
+    {
+        if (Input.GetKeyDown(controls.movement.crouch))
+        {
+            if (heightTransition != null)
+            {
+                StopCoroutine(heightTransition);
+            }
+            heightTransition = StartCoroutine(HeightTransition(defaultHeight * crouchScale));
+        }
+        else if (Input.GetKeyUp(controls.movement.crouch))
+        {
+            if (heightTransition != null)
+            {
+                StopCoroutine(heightTransition);
+            }
+            heightTransition = StartCoroutine(HeightTransition(defaultHeight));
+        }
     }
 
     private void MoveControl()
     {
         float movMulti = 8.0f;
-        if (Input.GetKey(controls.movement.sprint))
+        if (Input.GetKey(controls.movement.crouch))
+        {
+            movMulti *= crouchFactor;
+        }
+        else if (Input.GetKey(controls.movement.sprint))
         {
             movMulti *= sprintFactor;
         }
+
         float fwdFactor = 0;
         float rhtFactor = 0;
         if (isOnFloor)
@@ -253,7 +285,11 @@ public class Player : CoreFunctionality
     private void CapSpeed()
     {
         float movMulti = 1.0f;
-        if (Input.GetKey(controls.movement.sprint))
+        if (Input.GetKey(controls.movement.crouch))
+        {
+            movMulti *= crouchFactor;
+        }
+        else if (Input.GetKey(controls.movement.sprint))
         {
             movMulti *= sprintFactor;
         }
@@ -267,6 +303,24 @@ public class Player : CoreFunctionality
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+    private void GetComponents()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+        cldr = gameObject.GetComponent<CapsuleCollider>();
+
+        defaultHeight = cldr.height;
+        defaultDrag = rb.drag;
+        rotFactor = (float)settings.control.lookSensitivity * 0.15f;
+
+        camYaw = playerCam.transform.eulerAngles[1];
+        CheckCamInvert();
+
+        this.Inventory = new Inventory();
+        Inventory.invenFrame = FindObjectOfType<InvenFrame>();
+
+        shadow = transform.GetChild(0).gameObject;
+    }
 
     private void GetInteractions()
     {
@@ -285,13 +339,13 @@ public class Player : CoreFunctionality
         }
     }
 
-    private void SetCamera()
+    private void Camera()
     {
-        float h = this.GetComponent<CapsuleCollider>().height;
-        float r = this.GetComponent<CapsuleCollider>().radius;
-        float x = (h - r) / 2;
-        playerCam.SetFollow(this.gameObject, x);
-        camYaw = playerCam.transform.eulerAngles[1];
+        float h = cldr.height;
+        float r = cldr.radius;
+        float x1 = (h - r) / 2;
+        playerCam.SetFollow(this.gameObject, x1);
+        playerCam.SetRot(new Vector3(camPitch, camYaw, 0.0f));
     }
 
     public void LockCursor(bool csrLock)
@@ -336,6 +390,26 @@ public class Player : CoreFunctionality
         }
 
         return closestInteract;
+    }
+
+    private IEnumerator HeightTransition(float targetHeight)
+    {
+        float startHeight = cldr.height;
+        float heightDiff = targetHeight - startHeight;
+
+        float aDuration = 0.1f;
+        int aFrames = 20;
+        float aFrameTime = aDuration / (float)aFrames;
+
+        for (int i = 1; i <= aFrames; i++)
+        {
+            float delta = (float)i / (float)aFrames;
+            yield return new WaitForSeconds(aFrameTime);
+
+            float posY = transform.position[1] + ( heightDiff / (float)aFrames ) / 2.0f;
+            transform.position = new Vector3(transform.position[0], posY, transform.position[2]);
+            cldr.height = Mathf.Lerp(startHeight, targetHeight, delta);
+        }
     }
 
 }
