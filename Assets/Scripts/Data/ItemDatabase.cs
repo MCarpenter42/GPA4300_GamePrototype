@@ -82,7 +82,7 @@ public class ItemDatabase
 		(
 			"Brass Key",
 			"A simple brass key.",
-			"Key1"
+			"Key2"
 		),
 	};
 

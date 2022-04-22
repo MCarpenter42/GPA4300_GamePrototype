@@ -26,7 +26,11 @@ public class Door : MonoBehaviour
     [SerializeField] float openTime = 0.8f;
     [SerializeField] float closeTime;
 
-	#endregion
+    [Header("Audio")]
+    [SerializeField] AudioClip openSound;
+    [SerializeField] AudioClip closeSound;
+
+    #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

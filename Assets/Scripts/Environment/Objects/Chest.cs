@@ -34,6 +34,10 @@ public class Chest : CoreFunctionality
     private Vector3 rotClosed;
     private Vector3 rotOpen;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip openSound;
+    [SerializeField] AudioClip closeSound;
+
     #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

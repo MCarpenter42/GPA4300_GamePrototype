@@ -14,6 +14,10 @@ TagManager:
   - Additional
   - Text
   - Shadow
+  - SFX_Move
+  - SFX_Item
+  - SFX_Ambient
+  - SFX_Environment
   layers:
   - Default
   - TransparentFX

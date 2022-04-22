@@ -56,6 +56,21 @@ public class Player : CoreFunctionality
 
     public Inventory Inventory { get; private set; }
 
+    // AUDIO
+
+    private AudioSource[] sources = new AudioSource[4];
+
+    private AudioSource moveSFX;
+    [SerializeField] AudioClip crouchLoop;
+    [SerializeField] AudioClip walkLoop;
+    [SerializeField] AudioClip runLoop;
+
+    private AudioSource itemSFX;
+    [SerializeField] AudioClip itemPickup;
+
+    private AudioSource ambientSFX;
+    private AudioSource environmentSFX;
+
     #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -77,6 +92,7 @@ public class Player : CoreFunctionality
         LookControl();
         CrouchControl();
         MoveControl();
+        MoveAudio();
         InteractCheck();
     }
 
@@ -304,6 +320,45 @@ public class Player : CoreFunctionality
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+    private void MoveAudio()
+    {
+        if (Input.GetKey(controls.movement.crouch))
+        {
+            moveSFX.clip = crouchLoop;
+        }
+        else if (Input.GetKey(controls.movement.sprint))
+        {
+            moveSFX.clip = runLoop;
+        }
+        else
+        {
+            moveSFX.clip = walkLoop;
+        }
+
+        if (isOnFloor)
+        {
+            if (rb.velocity.magnitude < 0.2f)
+            {
+                moveSFX.Stop();
+            }
+            else if (!moveSFX.isPlaying)
+            {
+                moveSFX.Play();
+            }
+        }
+        else
+        {
+            moveSFX.Stop();
+        }
+    }
+
+    public void PlayClip(AudioSources source, AudioClip clip)
+    {
+        itemSFX.PlayOneShot(itemPickup);
+    }
+
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
     private void GetComponents()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -321,6 +376,32 @@ public class Player : CoreFunctionality
         Inventory.hud = FindObjectOfType<HUD>();
 
         shadow = transform.GetChild(0).gameObject;
+
+        for (int i = 0; i < playerCam.transform.childCount; i++)
+        {
+            GameObject child = playerCam.transform.GetChild(i).gameObject;
+            if (child.CompareTag("SFX_Move"))
+            {
+                moveSFX = child.GetComponent<AudioSource>();
+            }
+            if (child.CompareTag("SFX_Item"))
+            {
+                itemSFX = child.GetComponent<AudioSource>();
+            }
+            if (child.CompareTag("SFX_Ambient"))
+            {
+                ambientSFX = child.GetComponent<AudioSource>();
+            }
+            if (child.CompareTag("SFX_Environment"))
+            {
+                environmentSFX = child.GetComponent<AudioSource>();
+            }
+        }
+
+        sources[0] = moveSFX;
+        sources[1] = itemSFX;
+        sources[2] = ambientSFX;
+        sources[3] = environmentSFX;
     }
 
     private void GetInteractions()
