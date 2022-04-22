@@ -21,6 +21,7 @@ public class Overlay : UI
         frameHandler = gameObject.AddComponent<FrameHandler>();
         frameHandler.SetValues(false, "Button", true);
         GetComponents();
+        frameHandler.onShow = OnShow;
     }
 
     void Start()
@@ -48,7 +49,6 @@ public class Overlay : UI
         {
             frameHandler.ChangeFrame(i);
             frameHandler.Show(true);
-            closeButton.SetActive(true);
             float btnPosX = frameHandler.frames[i].GetComponent<RectTransform>().rect.width / 2.0f - 5.0f;
             float btnPosY = -(frameHandler.frames[i].GetComponent<RectTransform>().rect.height / 2.0f + 5.0f);
             closeButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(btnPosX, btnPosY);
@@ -58,6 +58,10 @@ public class Overlay : UI
     public void HideOverlay()
     {
         frameHandler.Show(false);
-        closeButton.SetActive(false);
+    }
+
+    private void OnShow(bool show)
+    {
+        closeButton.SetActive(show);
     }
 }
