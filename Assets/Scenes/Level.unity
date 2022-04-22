@@ -949,7 +949,7 @@ MonoBehaviour:
   unobstructedInteract: {fileID: 533794156}
   obstructedInteract: {fileID: 0}
   rotOpen: {x: 0, y: -90, z: 0}
-  startOpen: 1
+  startOpen: 0
   canReClose: 0
   openTime: 0.8
   closeTime: 0
@@ -2878,7 +2878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &157757225
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3946,7 +3946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &234602904
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5098,7 +5098,7 @@ MonoBehaviour:
   unobstructedInteract: {fileID: 533340064}
   obstructedInteract: {fileID: 0}
   rotOpen: {x: 0, y: -90, z: 0}
-  startOpen: 1
+  startOpen: 0
   canReClose: 0
   openTime: 0.8
   closeTime: 0
@@ -9680,8 +9680,8 @@ MonoBehaviour:
     Don''t worry
     about writing text that''s too long for a line, as it''ll just wrap to the next'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 15f6522489eadf14c85230829ba9832c, type: 2}
+  m_sharedMaterial: {fileID: 4913580509012968755, guid: 15f6522489eadf14c85230829ba9832c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9705,8 +9705,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12767,8 +12767,8 @@ MonoBehaviour:
     Don''t worry
     about writing text that''s too long for a line, as it''ll just wrap to the next'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 15f6522489eadf14c85230829ba9832c, type: 2}
+  m_sharedMaterial: {fileID: 4913580509012968755, guid: 15f6522489eadf14c85230829ba9832c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12792,8 +12792,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -21843,7 +21843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1146953521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26131,7 +26131,7 @@ MonoBehaviour:
   unobstructedInteract: {fileID: 235499338}
   obstructedInteract: {fileID: 0}
   rotOpen: {x: 0, y: -90, z: 0}
-  startOpen: 1
+  startOpen: 0
   canReClose: 0
   openTime: 0.8
   closeTime: 0
@@ -31029,7 +31029,7 @@ MonoBehaviour:
   unobstructedInteract: {fileID: 207061781}
   obstructedInteract: {fileID: 0}
   rotOpen: {x: 0, y: -90, z: 0}
-  startOpen: 1
+  startOpen: 0
   canReClose: 0
   openTime: 0.8
   closeTime: 0

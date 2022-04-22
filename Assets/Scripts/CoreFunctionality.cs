@@ -7,7 +7,7 @@ public class CoreFunctionality : MonoBehaviour
 {
     #region [ PARAMETERS ]
 
-    public enum ItemNames { emptyItem, basicKey, emerald, lockpickPins, noteA };
+    public enum ItemNames { emptyItem, basicKey, emerald, lockpickPins, noteA, noteB, noteC };
     public static Controls controls = new Controls();
     public static Settings settings = new Settings();
     public static ItemDatabase itemDB = new ItemDatabase();

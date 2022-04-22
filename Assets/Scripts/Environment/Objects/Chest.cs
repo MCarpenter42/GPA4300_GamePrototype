@@ -116,8 +116,6 @@ public class Chest : CoreFunctionality
             rotEnd = rotClosed;
         }
 
-        Debug.Log(rotStart + " | " + rotEnd);
-
         if (rotStart.magnitude > 180.0f)
         {
             float x = rotStart.magnitude - 360.0f;

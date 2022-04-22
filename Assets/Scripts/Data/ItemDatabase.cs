@@ -22,24 +22,21 @@ public class ItemDatabase
 			(
 				null,
 				null,
-				"EmptyIcon",
-				false
+				"EmptyIcon"
 			),
 			// ID 1 - Test key
 			new Item
 			(
 				"Iron Key",
 				"A simple iron key.",
-				"Key1",
-				false
+				"Key1"
 			),
 			// ID 2 - Emerald
 			new Item
 			(
 				"Emerald",
 				"A highly polished green gemstone.",
-				"Gem1",
-				false
+				"Gem1"
 			),
 			// ID 3 - Lockpins
 			new Item
@@ -58,6 +55,30 @@ public class ItemDatabase
 				false,
 				Color.blue,
 				0,
+				"PaperSheet",
+				false
+			),
+			// ID 5 - Note B
+			new Item
+			(
+				"Handwritten Note",
+				"A cryptic note written in spidery handwriting.",
+				"< Click to read >",
+				false,
+				Color.blue,
+				1,
+				"PaperSheet",
+				false
+			),
+			// ID 6 - Note C
+			new Item
+			(
+				"Handwritten Note",
+				"A cryptic note written in spidery handwriting.",
+				"< Click to read >",
+				false,
+				Color.blue,
+				2,
 				"PaperSheet",
 				false
 			),
