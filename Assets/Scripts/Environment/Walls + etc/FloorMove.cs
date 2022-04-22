@@ -6,12 +6,9 @@ public class FloorMove : CoreFunctionality
 {
     public List<GameObject> floor;
     public List<GameObject> key;
-    public List<Vector3> keyzone1;
-    public List<Vector3> keyzone2;
-    public List<Vector3> keyzone3;
-    public List<Vector3> keyrot1;
-    public List<Vector3> keyrot2;
-    public List<Vector3> keyrot3;
+    public List<GameObject> jpos;
+    public List<GameObject> cpos;
+    public List<GameObject> bpos;
     public Vector3 playzone;
 
     int roomhold;
@@ -25,25 +22,23 @@ public class FloorMove : CoreFunctionality
         // Changed how the value is selected, as Untiy's "Random.Range" behaves slightly differently to C#'sa default random number generation
         floor[roomhold].transform.position = new Vector3(playzone.x, playzone.y, playzone.z);
 
-        keyhold = RandomInt(0, key.Count - 1);
-        switch (keyhold)
+        switch (roomhold)
         {
             case 0:
-                key[roomhold].transform.position = new Vector3(keyzone1[roomhold].x, keyzone1[roomhold].y, keyzone1[roomhold].z);
-                key[roomhold].transform.eulerAngles = new Vector3(keyrot1[roomhold].x, keyrot1[roomhold].y, keyrot1[roomhold].z);
+                keyhold = RandomInt(0, jpos.Count - 1);
+                key[roomhold].transform.position = jpos[keyhold].transform.position;
+                key[roomhold].transform.eulerAngles = jpos[keyhold].transform.eulerAngles;
                 break;
             case 1:
-                key[roomhold].transform.position = new Vector3(keyzone2[roomhold].x, keyzone2[roomhold].y, keyzone2[roomhold].z);
-                key[roomhold].transform.eulerAngles = new Vector3(keyrot2[roomhold].x, keyrot2[roomhold].y, keyrot2[roomhold].z);
+                keyhold = RandomInt(0, cpos.Count - 1);
+                key[roomhold].transform.position = cpos[keyhold].transform.position;
+                key[roomhold].transform.eulerAngles = cpos[keyhold].transform.eulerAngles;
                 break;
             case 2:
-                key[roomhold].transform.position = new Vector3(keyzone3[roomhold].x, keyzone3[roomhold].y, keyzone3[roomhold].z);
-                key[roomhold].transform.eulerAngles = new Vector3(keyrot3[roomhold].x, keyrot3[roomhold].y, keyrot3[roomhold].z);
+                keyhold = RandomInt(0, bpos.Count - 1);
+                key[roomhold].transform.position = bpos[keyhold].transform.position;
+                key[roomhold].transform.eulerAngles = bpos[keyhold].transform.eulerAngles;
                 break;
-            case 3:
-                key[roomhold].transform.position = new Vector3(keyzone3[roomhold].x, keyzone3[roomhold].y, keyzone3[roomhold].z);
-                key[roomhold].transform.eulerAngles = new Vector3(keyrot3[roomhold].x, keyrot3[roomhold].y, keyrot3[roomhold].z);
-                break;   
         }
     }
 }
