@@ -21,7 +21,7 @@ public class LockedInteract : Interaction
     #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    
+
     public LockedInteract()
     {
         this.isEnabled = true;
@@ -54,7 +54,8 @@ public class LockedInteract : Interaction
                 }
                 else
                 {
-                    Debug.Log("You don't have the right key...");
+                    string notifText = "You don't have the right key...";
+                    hud.Notification(notifText);
                 }
             }
             else
@@ -77,6 +78,8 @@ public class LockedInteract : Interaction
         if (itemDB.items[(int)keyItemID].breakWhenUsed)
         {
             player.Inventory.SetSlot(index, 0);
+            string notifText = itemDB.items[(int)keyItemID].name + " broke!";
+            hud.Notification(notifText);
         }
     }
 }

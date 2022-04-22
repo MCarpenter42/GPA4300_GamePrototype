@@ -42,10 +42,12 @@ public class Interaction : CoreFunctionality
 
     protected Player player;
 
+    protected HUD hud;
+
     #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-    
+
     public Interaction()
     {
         this.isEnabled = true;
@@ -57,6 +59,7 @@ public class Interaction : CoreFunctionality
     {
         GetIndicator();
         GetCamera();
+        hud = FindObjectOfType<HUD>();
         IconsToArray();
     }
 
@@ -76,11 +79,6 @@ public class Interaction : CoreFunctionality
         {
             RotateIndicator();
         }
-    }
-
-    protected void FixedUpdate()
-    {
-        
     }
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

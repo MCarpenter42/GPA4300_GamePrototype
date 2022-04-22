@@ -21,4 +21,12 @@ public class AreaTrigger : CoreFunctionality
             onEnterEvent.Invoke();
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            onEnterEvent.Invoke();
+        }
+    }
 }

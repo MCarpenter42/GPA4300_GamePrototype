@@ -10,11 +10,12 @@ public class Inventory : CoreFunctionality
     private int[] items = new int[30];
 
     public InvenFrame invenFrame;
+    public HUD hud;
 
-	#endregion
+    #endregion
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	
+
     public bool AddItem(int id)
     {
         bool itemAdded = false;
@@ -28,8 +29,12 @@ public class Inventory : CoreFunctionality
                 break;
             }
         }
-        //Debug.Log("Item of ID " + id + " (\"" + itemDB.items[id].name + "\") added to inventory slot " + i + ".");
         invenFrame.UpdateIcons();
+        if (hud != null)
+        {
+            string notifText = itemDB.items[id].name + " added to inventory.";
+            hud.Notification(notifText);
+        }
         return itemAdded;
     }
 

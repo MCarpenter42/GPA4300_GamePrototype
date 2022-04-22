@@ -318,6 +318,7 @@ public class Player : CoreFunctionality
 
         this.Inventory = new Inventory();
         Inventory.invenFrame = FindObjectOfType<InvenFrame>();
+        Inventory.hud = FindObjectOfType<HUD>();
 
         shadow = transform.GetChild(0).gameObject;
     }

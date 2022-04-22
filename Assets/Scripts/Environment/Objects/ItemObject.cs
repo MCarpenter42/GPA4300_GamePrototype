@@ -15,14 +15,14 @@ public class ItemObject : CoreFunctionality
 
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-    void Start()
+    void Awake()
     {
-        GetPlayer();
+        GetComponents();
     }
 	
     /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 	
-    private void GetPlayer()
+    private void GetComponents()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }

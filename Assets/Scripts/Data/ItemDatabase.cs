@@ -19,7 +19,7 @@ public class ItemDatabase
 			null,
 			"EmptyIcon"
 		),
-		// ID 1 - Test key
+		// ID 1 - Basic key
 		new Item
 		(
 			"Iron Key",
@@ -76,6 +76,13 @@ public class ItemDatabase
 			2,
 			"PaperSheet",
 			false
+		),
+		// ID 7 - Basic key
+		new Item
+		(
+			"Brass Key",
+			"A simple brass key.",
+			"Key1"
 		),
 	};
 
