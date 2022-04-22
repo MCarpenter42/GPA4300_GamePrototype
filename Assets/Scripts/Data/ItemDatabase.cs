@@ -85,21 +85,31 @@ public class ItemDatabase
 
 }
 
+// This class handles information storage for individual items
+
 public class Item
 {
 	#region [ PARAMETERS ]
 
+	// Basic display information - all items will share this
 	public readonly string name;
 	public readonly string description;
 
+	// Some items need an extra bit of text with slightly different formatting
 	public readonly string moreInfo;
 	public readonly bool moreInfoItalic;
 	public readonly Color moreInfoColour;
 
+	// Some items need to trigger a function when clicked on in the inventory
 	public readonly int actionOnClick;
 
+	// Filepath for the item's inventory icon
+	// This is re-created in the constructor from the directory path the icons
+	// are stored in, and the actual name of the file, which is passed as an
+	// argument when the constructor is called.
 	public readonly string iconPath;
 
+	// Whether the item should be removed from the inventory when used
 	public readonly bool breakWhenUsed;
 
 	#endregion

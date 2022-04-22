@@ -154,4 +154,9 @@ public class Interaction : CoreFunctionality
     {
         isEnabled = enable;
     }
+
+    public void OffsetIndicator(Vector3 offset)
+    {
+        indicator.transform.position += offset;
+    }
 }
