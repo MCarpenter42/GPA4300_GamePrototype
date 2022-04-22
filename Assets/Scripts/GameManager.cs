@@ -81,8 +81,6 @@ public class GameManager : CoreFunctionality
     {
         if (!setupRun)
         {
-            itemDB.CompileDatabase();
-
             setupRun = true;
         }
     }

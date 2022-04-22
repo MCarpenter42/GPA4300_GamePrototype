@@ -3,87 +3,86 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This class stores the information about the various items the player
+// can pick up, as the player's actual inventory is just an integer array.
+
 public class ItemDatabase
 {
 	#region [ PARAMETERS ]
 
-	public List<Item> items { get; private set; }
+	public List<Item> items = new List<Item>
+	{
+		// ID 0 - Empty item
+		new Item
+		(
+			null,
+			null,
+			"EmptyIcon"
+		),
+		// ID 1 - Test key
+		new Item
+		(
+			"Iron Key",
+			"A simple iron key.",
+			"Key1"
+		),
+		// ID 2 - Emerald
+		new Item
+		(
+			"Emerald",
+			"A highly polished green gemstone.",
+			"Gem1"
+		),
+		// ID 3 - Lockpins
+		new Item
+		(
+			"Tough Needles",
+			"Might be able to be used as lockpicks.",
+			"lockpins",
+			true
+		),
+		// ID 4 - Note A
+		new Item
+		(
+			"Handwritten Note",
+			"A cryptic note written in spidery handwriting.",
+			"< Click to read >",
+			false,
+			Color.blue,
+			0,
+			"PaperSheet",
+			false
+		),
+		// ID 5 - Note B
+		new Item
+		(
+			"Handwritten Note",
+			"A cryptic note written in spidery handwriting.",
+			"< Click to read >",
+			false,
+			Color.blue,
+			1,
+			"PaperSheet",
+			false
+		),
+		// ID 6 - Note C
+		new Item
+		(
+			"Handwritten Note",
+			"A cryptic note written in spidery handwriting.",
+			"< Click to read >",
+			false,
+			Color.blue,
+			2,
+			"PaperSheet",
+			false
+		),
+	};
 
 	#endregion
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-	public void CompileDatabase()
-    {
-		items = new List<Item>
-		{
-			// ID 0 - Empty item
-			new Item
-			(
-				null,
-				null,
-				"EmptyIcon"
-			),
-			// ID 1 - Test key
-			new Item
-			(
-				"Iron Key",
-				"A simple iron key.",
-				"Key1"
-			),
-			// ID 2 - Emerald
-			new Item
-			(
-				"Emerald",
-				"A highly polished green gemstone.",
-				"Gem1"
-			),
-			// ID 3 - Lockpins
-			new Item
-			(
-				"Tough Needles",
-				"Might be able to be used as lockpicks.",
-				"lockpins",
-				true
-			),
-			// ID 4 - Note A
-			new Item
-			(
-				"Handwritten Note",
-				"A cryptic note written in spidery handwriting.",
-				"< Click to read >",
-				false,
-				Color.blue,
-				0,
-				"PaperSheet",
-				false
-			),
-			// ID 5 - Note B
-			new Item
-			(
-				"Handwritten Note",
-				"A cryptic note written in spidery handwriting.",
-				"< Click to read >",
-				false,
-				Color.blue,
-				1,
-				"PaperSheet",
-				false
-			),
-			// ID 6 - Note C
-			new Item
-			(
-				"Handwritten Note",
-				"A cryptic note written in spidery handwriting.",
-				"< Click to read >",
-				false,
-				Color.blue,
-				2,
-				"PaperSheet",
-				false
-			),
-		};
-    }
 }
 
 public class Item
