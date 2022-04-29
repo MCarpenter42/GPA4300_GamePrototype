@@ -94,6 +94,7 @@ public class GameManager : CoreFunctionality
 public class GameState
 {
     public bool isPaused;
+    public bool gameEnded = false;
 
     public void Init()
     {

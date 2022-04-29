@@ -32,7 +32,7 @@ public class PauseMenu : UI
 
     void Update()
     {
-        if (Input.GetKeyDown(controls.menu.pause))
+        if (Input.GetKeyDown(controls.menu.pause) && !GameManager.state.gameEnded == true)
         {
             OnPausePress();
         }
